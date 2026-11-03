@@ -1,0 +1,1443 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HD Clot Watch · หน่วยไตเทียม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mali:wght@500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Palette updated: pastel green ground, sage-green primary. Layout: one friendly working column. Form follows the unit's own guideline: SCREEN → MONITOR (TRIGGER/ACT in each time point) → EVALUATE.
+   Palette: soft lavender ground, violet primary, the guideline's 4 status colours. Type: Mali (rounded display), Plex Sans Thai Looped (readable body), Plex Mono (numbers). */
+:root{
+  --bg:#eef7f1; --surface:#ffffff; --sunk:#f5fbf7; --line:#d3eadc; --ink:#1f3a2f; --muted:#5d7a6c;
+  --primary:#2f8f68; --primary-ink:#ffffff; --primary-soft:#dcf2e5; --accent:#b8e3c9;
+  --g:#1f9d6b; --g-soft:#dcf4e8; --y:#b98100; --y-soft:#fff2c9; --o:#dd6116; --o-soft:#ffe5d3; --r:#d42e48; --r-soft:#fde0e5;
+  --shadow:0 1px 0 rgba(30,90,60,.06),0 6px 18px -10px rgba(30,90,60,.25);
+  --f-disp:"Mali","IBM Plex Sans Thai Looped",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai Looped",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111d17; --surface:#1a2a22; --sunk:#15231c; --line:#2c4537; --ink:#e6f4ec; --muted:#9fbdad;
+  --primary:#8fd9b1; --primary-ink:#10241a; --primary-soft:#22402f; --accent:#2f5a43;
+  --g:#5fd3a0; --g-soft:#173528; --y:#f2c14e; --y-soft:#3a3016; --o:#ff9a5c; --o-soft:#3d2617; --r:#ff7a8e; --r-soft:#3f1d26;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 20px -12px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111d17; --surface:#1a2a22; --sunk:#15231c; --line:#2c4537; --ink:#e6f4ec; --muted:#9fbdad;
+  --primary:#8fd9b1; --primary-ink:#10241a; --primary-soft:#22402f; --accent:#2f5a43;
+  --g:#5fd3a0; --g-soft:#173528; --y:#f2c14e; --y-soft:#3a3016; --o:#ff9a5c; --o-soft:#3d2617; --r:#ff7a8e; --r-soft:#3f1d26;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 20px -12px rgba(0,0,0,.6); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{padding-top:env(safe-area-inset-top,0px)}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:820px;margin:0 auto}
+h1,h2,h3,.disp{font-family:var(--f-disp);font-weight:700;letter-spacing:0}
+/* header */
+.top{display:flex;gap:14px;align-items:center;padding-block:18px 10px}
+.top svg{flex:none}
+.top h1{font-size:22px;margin:0;line-height:1.25;text-wrap:balance}
+.top p{margin:2px 0 0;color:var(--muted);font-size:13px}
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding-block:8px 10px}
+.tabbar{display:flex;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px;box-shadow:var(--shadow)}
+.tabbar button{flex:1;display:flex;gap:6px;align-items:center;justify-content:center;font:inherit;font-family:var(--f-disp);font-weight:600;font-size:15px;border:0;background:none;color:var(--muted);padding:8px 6px;border-radius:999px;cursor:pointer}
+.tabbar button svg{width:18px;height:18px}
+.tabbar button[aria-selected="true"]{background:var(--primary);color:var(--primary-ink)}
+.statusrow{display:flex;gap:8px 12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:2px 4px 10px}
+.statusrow .status{margin:0}
+.who-chip{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);font-weight:600}
+.who-chip select{width:190px;max-width:52vw;padding:4px 10px;font-size:13px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.who-chip.need select{border-color:var(--o);background:var(--o-soft)}
+.who-chip input[type=text]{width:150px;padding:4px 10px;font-size:13px;font-family:var(--f-body);border-radius:999px;background:var(--surface)}
+.who-chip.need input{border-color:var(--o);background:var(--o-soft)}
+.status{font-size:12.5px;color:var(--muted);margin:2px 4px 10px;display:flex;gap:6px;align-items:center}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--y)}
+.status.ok::before{background:var(--g)} .status.err{color:var(--r)} .status.err::before{background:var(--r)}
+/* step nav */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.step{display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 10px;cursor:pointer;font:inherit;color:var(--ink);text-align:left;min-width:0}
+.step .ic{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary)}
+.step .ic svg{width:18px;height:18px}
+.step b{display:block;font-family:var(--f-disp);font-size:13.5px;line-height:1.2}
+.step small{display:block;color:var(--muted);font-size:11.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.step.done .ic{background:var(--g-soft);color:var(--g)}
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow);scroll-margin-top:80px}
+.card-h{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.card-h .ic{flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary)}
+.card-h .ic svg{width:22px;height:22px}
+.card-h h2{font-size:18px;margin:0;line-height:1.25}
+.card-h p{margin:0;color:var(--muted);font-size:12.5px}
+.tag{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--primary);text-transform:uppercase}
+.sub{font-family:var(--f-disp);font-size:14.5px;margin:18px 0 10px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.sub::after{content:"";flex:1;height:1px;background:var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field.wide{grid-column:1/-1}
+.field label,.field .lbl{font-size:13px;font-weight:600}
+.q{display:inline-block;min-width:20px;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);margin-right:2px}
+.new{font-size:10.5px;color:var(--primary);background:var(--primary-soft);border-radius:999px;padding:0 7px;margin-left:6px;font-weight:600;vertical-align:1px}
+.hint{font-size:12px;color:var(--muted)}
+input[type=text],input[type=number],input[type=date],input[type=time],select{font:inherit;font-family:var(--f-mono);font-size:15px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--sunk);color:var(--ink);width:100%}
+select{font-family:var(--f-body);font-size:14px}
+input:focus-visible,select:focus-visible,button:focus-visible,.seg label:focus-within,.pill:focus-within,.gcard:focus-within{outline:2.5px solid var(--primary);outline-offset:2px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label,.pill{position:relative;cursor:pointer}
+.seg input,.pill input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span,.pill span{display:inline-block;padding:6px 14px;border:1.5px solid var(--line);border-radius:999px;font-size:13.5px;background:var(--sunk);transition:background .12s,border-color .12s}
+.seg input:checked+span{background:var(--primary-soft);border-color:var(--primary);color:var(--ink);font-weight:600}
+.pill input:checked+span{background:var(--primary);border-color:var(--primary);color:var(--primary-ink);font-weight:600}
+.pill.warn input:checked+span{background:var(--r-soft);border-color:var(--r);color:var(--r)}
+.risk{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--sunk);border:1.5px dashed var(--line);font-size:13px}
+.risk b{font-family:var(--f-disp)}
+.risk .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.rchip{background:var(--o-soft);color:var(--o);border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600}
+/* monitor */
+.now{display:flex;gap:14px;align-items:center;border-radius:16px;padding:12px 14px;margin-bottom:14px;background:var(--sunk);border:1.5px solid var(--line)}
+.now .big{font-family:var(--f-disp);font-size:20px;line-height:1.2}
+.now .sm{font-size:12.5px;color:var(--muted)}
+.now .lamp{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--line)}
+.now .lamp svg{width:24px;height:24px}
+.now.l0{background:var(--g-soft);border-color:var(--g)} .now.l0 .lamp{background:var(--g);color:var(--surface)}
+.now.l1{background:var(--y-soft);border-color:var(--y)} .now.l1 .lamp{background:var(--y);color:var(--surface)}
+.now.l2{background:var(--o-soft);border-color:var(--o)} .now.l2 .lamp{background:var(--o);color:var(--surface)}
+.now.l3{background:var(--r-soft);border-color:var(--r)} .now.l3 .lamp{background:var(--r);color:var(--surface)}
+details.ref{border:1.5px solid var(--line);border-radius:14px;padding:4px 12px;margin-bottom:14px;background:var(--sunk)}
+details.ref summary{cursor:pointer;font-family:var(--f-disp);font-weight:600;font-size:14px;padding:6px 0}
+.reftbl{overflow-x:auto;margin:6px 0 10px}
+.reftbl table{border-collapse:separate;border-spacing:4px;width:100%;min-width:520px;font-size:12.5px}
+.reftbl th{font-family:var(--f-disp);padding:6px;border-radius:8px;color:var(--surface)}
+.reftbl td{padding:6px 8px;border-radius:8px;background:var(--surface);vertical-align:top}
+.reftbl td:first-child{font-weight:600;background:none}
+.c0{background:var(--g)} .c1{background:var(--y)} .c2{background:var(--o)} .c3{background:var(--r)}
+.timeline{display:flex;flex-direction:column;gap:0}
+.pt{display:grid;grid-template-columns:28px 1fr;gap:10px}
+.pt-rail{display:flex;flex-direction:column;align-items:center}
+.pt-dot{width:18px;height:18px;border-radius:50%;background:var(--surface);border:4px solid var(--line);margin-top:18px;flex:none}
+.pt-line{flex:1;width:3px;background:var(--line);border-radius:2px;margin-top:2px}
+.pt:last-child .pt-line{background:transparent}
+.pt-body{background:var(--sunk);border:1.5px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px;min-width:0}
+.pt.l0 .pt-dot{border-color:var(--g)} .pt.l1 .pt-dot{border-color:var(--y)} .pt.l2 .pt-dot{border-color:var(--o)} .pt.l3 .pt-dot{border-color:var(--r);background:var(--r)}
+.pt.l1 .pt-body{border-color:var(--y)} .pt.l2 .pt-body{border-color:var(--o)} .pt.l3 .pt-body{border-color:var(--r);border-width:2px}
+.pt-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.minbox{display:flex;align-items:center;gap:8px 10px;flex-wrap:wrap;font-family:var(--f-disp);font-weight:600;flex:1 1 100%}
+.elapsed{display:flex;align-items:center;gap:6px}
+.elapsed .ell{font-size:14px}
+.elapsed input{width:66px!important;min-width:0!important;padding-left:8px!important;padding-right:8px!important;text-align:center}
+.elapsed .u{font-family:var(--f-body);font-weight:500;font-size:13px;color:var(--muted)}
+.esrc{flex:1 1 100%;font-family:var(--f-body);font-weight:500;font-size:12.5px;color:var(--muted);margin-top:-2px}
+.esrc.warn{color:var(--o);font-weight:600}
+.minbox input{width:76px;padding:5px 8px;font-size:15px;text-align:center}
+.minbox input[type=time]{width:auto;min-width:112px;padding:6px 10px;font-size:16px;text-align:center;background:var(--surface)}
+.mincalc{font-family:var(--f-body);font-weight:500;font-size:13px;color:var(--muted)}
+.mincalc.warn{color:var(--o);font-weight:600}
+.lvbadge{font-family:var(--f-disp);font-size:13px;font-weight:600;padding:2px 12px;border-radius:999px;background:var(--line);color:var(--ink)}
+.l0 .lvbadge{background:var(--g-soft);color:var(--g)} .l1 .lvbadge{background:var(--y-soft);color:var(--y)} .l2 .lvbadge{background:var(--o-soft);color:var(--o)} .l3 .lvbadge{background:var(--r);color:var(--surface)}
+.delta{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.delta b{color:var(--ink);font-weight:600}
+.rm{margin-left:auto;font:inherit;font-size:12.5px;border:0;background:none;color:var(--muted);cursor:pointer;padding:4px 6px;border-radius:8px}
+.rm:hover{color:var(--r)}
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}
+.pt-grid .field label{font-size:11.5px;color:var(--muted)}
+.pt-grid input,.pt-grid select{padding:7px 9px;background:var(--surface)}
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.flags .pill span{font-size:12.5px;padding:4px 12px}
+.eval{margin-top:10px;border-radius:12px;padding:10px 12px;font-size:13px;background:var(--g-soft)}
+.l1 .eval{background:var(--y-soft)} .l2 .eval{background:var(--o-soft)} .l3 .eval{background:var(--r-soft)}
+.eval .plan{font-weight:500}
+#f-dx{font-family:var(--f-body)}
+body.typing .savebar{position:static;box-shadow:none}
+.pidshow{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;padding:10px 14px;border-radius:18px;background:var(--primary-soft);border:1.5px solid var(--accent)}
+.pidtag{font-family:var(--f-disp);font-weight:600}
+.pidtag b{font-family:var(--f-mono);font-size:18px;color:var(--primary);margin-left:4px}
+.pidnote{font-size:12.5px;color:var(--muted);flex:1 1 100%;order:3}
+.pidshow .linkbtn{margin-left:auto}
+.linkbtn{font:inherit;font-size:13px;border:0;background:none;color:var(--primary);text-decoration:underline;cursor:pointer;padding:2px}
+#f-hn{font-size:17px;letter-spacing:.04em}
+.cmp{font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:12px;background:var(--surface)}
+.cmp.ok{color:var(--g)} .cmp.short{color:var(--o);background:var(--o-soft)}
+#endCard .elapsed{margin-top:2px}
+.dxsel[hidden]{display:none!important}
+.dxsel{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;border-radius:14px;border:1.5px dashed var(--line);min-height:42px;align-items:center}
+.dxchip{font:inherit;font-size:12.5px;font-weight:600;border:0;border-radius:999px;padding:3px 10px;background:var(--primary);color:var(--primary-ink);cursor:pointer}
+.dxchip.o{background:var(--accent);color:var(--ink)}
+.dxwrap{position:relative}
+.dxsug{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:8;background:var(--surface);border:1.5px solid var(--accent);border-radius:16px;box-shadow:0 12px 28px -12px rgba(20,70,45,.45);overflow:hidden;max-height:330px;overflow-y:auto}
+.dxopt{display:flex;flex-direction:column;align-items:flex-start;gap:0;width:100%;text-align:left;font:inherit;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);padding:9px 14px;cursor:pointer}
+.dxopt:last-child{border-bottom:0}
+.dxopt.act,.dxopt:hover{background:var(--primary-soft)}
+.dxopt .dxt{font-weight:600;font-size:14px}
+.dxopt .dxg2{font-size:11.5px;color:var(--muted)}
+.dxnone{padding:10px 14px;font-size:13px;color:var(--muted)}
+.dxcount{font-size:12px;color:var(--primary);margin-left:6px}
+#dxSearch{font:inherit;font-family:var(--f-body);font-size:14px;padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--sunk);color:var(--ink);width:100%;-webkit-appearance:none;appearance:none}
+.dxgroups{display:flex;flex-direction:column;gap:6px;padding-bottom:8px}
+.dxqh{font-size:12.5px;font-weight:600;color:var(--muted);margin-top:2px}
+.dxall{border-radius:14px}
+.dxall>summary{cursor:pointer;font-family:var(--f-disp);font-weight:600;font-size:13.5px;color:var(--primary);padding:6px 2px}
+.dxg{border:1.5px solid var(--line);border-radius:14px;background:var(--sunk);padding:2px 12px}
+.dxg summary{cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 0;font-family:var(--f-disp);font-weight:600;font-size:14px}
+.dxg summary .dxn{margin-left:auto;font-size:12px;min-width:22px;height:22px;border-radius:999px;display:grid;place-items:center;background:var(--primary);color:var(--primary-ink)}
+.dxlist{display:flex;flex-wrap:wrap;gap:6px;padding:2px 0 10px}
+.dxp span{font-size:12.5px!important;padding:4px 11px!important}
+#dxOther{font-family:var(--f-body);font-size:14px}
+.autosum{border-radius:16px;background:var(--sunk);border:1.5px dashed var(--accent);padding:10px 12px}
+.as-h{font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.as-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.as-grid>div{background:var(--surface);border-radius:12px;padding:8px 10px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column}
+.as-grid b{font-family:var(--f-mono);font-size:20px;color:var(--ink);line-height:1.3}
+.as-grid small{font-size:11px}
+.startcard{display:flex;flex-direction:column;gap:6px;padding:12px 14px;margin-bottom:14px;border-radius:20px;background:var(--primary-soft);border:1.5px solid var(--accent)}
+.startcard.need{border-color:var(--o);background:var(--o-soft)}
+.sc-l{font-family:var(--f-disp);font-weight:700;font-size:15px}
+.sc-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sc-row input{width:auto!important;min-width:130px;font-size:17px!important;text-align:center;background:var(--surface)!important}
+.sc-row .btn{padding:8px 14px}
+.triglbl{margin-top:10px;font-size:12px;font-weight:600;color:var(--muted)}
+.trig{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.trig span{background:var(--surface);border-radius:999px;padding:1px 9px;font-size:12px;border:1px solid var(--line)}
+.algo{margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--surface);font-size:12.5px;border-left:4px solid var(--g)}
+.algo.esc{border-left-color:var(--r)}
+.algo b{font-family:var(--f-disp)}
+details.acts{margin-top:10px;font-size:13px}
+details.acts summary{cursor:pointer;font-weight:600;color:var(--primary);padding:2px 0}
+.actpills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.actpills .pill span{font-size:12.5px;padding:4px 12px}
+.othertxt{flex:1 1 100%;font-family:var(--f-body)!important;font-size:13.5px!important;padding:7px 12px!important;border-radius:999px!important;background:var(--surface)!important}
+.reftbl td b{font-family:var(--f-disp)}
+.addpt{width:100%;font:inherit;font-family:var(--f-disp);font-weight:600;font-size:15px;border:2px dashed var(--primary);color:var(--primary);background:var(--primary-soft);border-radius:16px;padding:12px;cursor:pointer}
+.empty-mon{padding:18px;text-align:center;color:var(--muted);font-size:13.5px;border:1.5px dashed var(--line);border-radius:16px;margin-bottom:10px}
+.trend{margin-top:14px;background:var(--sunk);border:1.5px solid var(--line);border-radius:16px;padding:10px 12px}
+.trend svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12.5px;margin-bottom:4px}
+.sw{display:inline-block;width:16px;height:4px;border-radius:2px}
+.sw.vp{background:var(--primary)} .sw.tmp{background:var(--o)}
+/* grade cards */
+.gcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.gcard{position:relative;cursor:pointer;display:block}
+.gcard input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.gcard .in{display:flex;gap:10px;height:100%;border:2px solid var(--line);border-radius:16px;padding:10px;background:var(--sunk);transition:border-color .12s,background .12s}
+.gcard svg{flex:none;width:34px;height:72px}
+.gcard b{font-family:var(--f-disp);font-size:15px;display:block;line-height:1.2}
+.gcard em{font-style:normal;font-size:12px;font-weight:600}
+.gcard ul{margin:4px 0 0;padding-left:16px;font-size:12px;color:var(--muted);line-height:1.45}
+.gcard.g0 em{color:var(--g)} .gcard.g1 em{color:var(--y)} .gcard.g2 em{color:var(--o)} .gcard.g3 em{color:var(--r)}
+.gcard.g0 input:checked+.in{border-color:var(--g);background:var(--g-soft)}
+.gcard.g1 input:checked+.in{border-color:var(--y);background:var(--y-soft)}
+.gcard.g2 input:checked+.in{border-color:var(--o);background:var(--o-soft)}
+.gcard.g3 input:checked+.in{border-color:var(--r);background:var(--r-soft)}
+.outcome{margin-top:16px;padding:12px 14px;border-radius:14px;font-family:var(--f-disp);font-size:15px;font-weight:600;display:flex;gap:10px;align-items:center}
+.outcome.yes{background:var(--r-soft);color:var(--r)} .outcome.no{background:var(--g-soft);color:var(--g)}
+/* actions */
+.savebar{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px 12px;box-shadow:var(--shadow)}
+.btn{font:inherit;font-family:var(--f-disp);font-weight:600;border-radius:12px;padding:10px 18px;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--primary-ink)}
+.btn.danger{color:var(--r);border-color:var(--r)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.msg{font-size:13px;flex:1;min-width:160px}
+.msg.ok{color:var(--g)} .msg.bad{color:var(--r)}
+.editing{background:var(--y-soft);color:var(--ink);padding:10px 14px;border-radius:14px;font-size:13.5px;margin-bottom:12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;border:1.5px solid var(--y)}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13.5px;margin-top:12px}
+/* list */
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.tools input{max-width:240px}
+.rlist{display:flex;flex-direction:column;gap:8px}
+.rec{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow);text-align:left;font:inherit;color:var(--ink);width:100%}
+.rec:hover{border-color:var(--primary)}
+.rec .dot{width:12px;height:12px;border-radius:50%;background:var(--line)}
+.rec .dot.l0{background:var(--g)} .rec .dot.l1{background:var(--y)} .rec .dot.l2{background:var(--o)} .rec .dot.l3{background:var(--r)}
+.rec .pid{font-family:var(--f-disp);font-weight:700;font-size:15px}
+.rec .meta{font-size:12.5px;color:var(--muted)}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.chip.g0{background:var(--g-soft);color:var(--g)} .chip.g1{background:var(--y-soft);color:var(--y)} .chip.g2{background:var(--o-soft);color:var(--o)} .chip.g3{background:var(--r-soft);color:var(--r)}
+.chip.on{background:var(--primary-soft);color:var(--primary)}
+.chip.clot{background:var(--r);color:var(--surface)}
+.empty{padding:32px 16px;text-align:center;color:var(--muted);font-size:14px;background:var(--surface);border:1.5px dashed var(--line);border-radius:18px}
+/* summary */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+.kpi .v{font-family:var(--f-mono);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.kpi .k{font-size:12.5px;color:var(--muted)}
+.kpi.hl{background:var(--primary);border-color:var(--primary)} .kpi.hl .v,.kpi.hl .k{color:var(--primary-ink)}
+.prog{height:8px;border-radius:999px;background:var(--line);margin-top:8px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--g);border-radius:999px}
+.gbar{display:flex;height:28px;border-radius:999px;overflow:hidden;background:var(--line);margin:6px 0}
+.gbar i{display:block;height:100%}
+.glegend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted)}
+.glegend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+table.ft{border-collapse:collapse;width:100%;font-size:13.5px}
+.ft th,.ft td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.ft th{font-size:12px;color:var(--muted);font-weight:600}
+.ft td.num,.ft th.num{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ft tr:last-child td{border-bottom:0}
+h3{font-size:16px;margin:22px 0 8px}
+.note{font-size:12.5px;color:var(--muted);margin-top:8px}
+.setting{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-size:14px}
+.switch{display:flex;gap:10px;align-items:center;cursor:pointer}
+.switch input{width:20px;height:20px;accent-color:var(--primary)}
+/* board + location + gate */
+.bedgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.bedgrid label{position:relative;cursor:pointer}
+.bedgrid input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.bedgrid span{display:block;text-align:center;padding:7px 0;border:1.5px solid var(--line);border-radius:10px;font-family:var(--f-mono);font-weight:600;background:var(--sunk)}
+.bedgrid input:checked+span{background:var(--primary);border-color:var(--primary);color:var(--primary-ink)}
+.board-h{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.board-h h2{font-size:18px;margin:0;flex:1}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:18px}
+.bed{position:relative;text-align:left;font:inherit;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:10px 12px;min-height:104px;cursor:pointer;box-shadow:var(--shadow)}
+.bed.free{background:var(--sunk);box-shadow:none;cursor:default;color:var(--muted)}
+.bed .no{font-family:var(--f-disp);font-weight:700;font-size:17px}
+.bed .who{font-family:var(--f-mono);font-size:13px}
+.bed .st{font-size:12.5px;margin-top:4px}
+.bed .due{font-size:12px;color:var(--muted);margin-top:2px}
+.bed.l0{border-color:var(--g)} .bed.l1{border-color:var(--y);background:var(--y-soft)} .bed.l2{border-color:var(--o);background:var(--o-soft)} .bed.l3{border-color:var(--r);background:var(--r-soft)}
+.bed.over .due{color:var(--r);font-weight:700}
+.bed.over{outline:3px solid var(--r);outline-offset:1px}
+@media (prefers-reduced-motion:no-preference){.bed.l3,.bed.over{animation:pulse 1.2s ease-in-out infinite}}
+@keyframes pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--r) 30%,transparent)}}
+.gate{max-width:420px;margin:40px auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.gate h2{margin:0 0 6px;font-size:19px}
+.soundbtn[aria-pressed="true"]{background:var(--g-soft);border-color:var(--g);color:var(--g)}
+@media (max-width:520px){.step small{display:none}.step{padding:8px}.top h1{font-size:19px}}
+.hico{display:inline-grid;place-items:center;flex:none;width:28px;height:28px;border-radius:9px;background:var(--primary-soft);color:var(--primary);vertical-align:-7px;margin-right:8px}
+.hico svg{width:17px;height:17px}
+.sub .hico{width:24px;height:24px;border-radius:8px;margin-right:0}.sub .hico svg{width:15px;height:15px}
+.top .owner{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:3px 12px 3px 4px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:12.5px;color:var(--ink)}
+.top .owner .av{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary)}
+.top .owner .av svg{width:14px;height:14px}
+.top .owner b{font-weight:600}
+.foot{margin:28px 0 8px;text-align:center;font-size:12px;color:var(--muted)}
+.foot b{color:var(--ink);font-weight:600}
+.pidrow{display:flex;gap:8px}
+.pidrow select{flex:1;min-width:0;font-family:var(--f-mono)}
+.pidrow .btn{padding:8px 14px;white-space:nowrap}
+.newpt{margin-top:8px;padding:12px;border-radius:14px;background:var(--primary-soft);border:1.5px solid var(--primary);display:grid;gap:8px}
+.newpt input{background:var(--surface)}
+.np-code{font-family:var(--f-disp);font-weight:600}
+.np-code b{font-family:var(--f-mono);font-size:19px;color:var(--primary);margin-left:6px}
+.np-act{display:flex;gap:8px;flex-wrap:wrap}
+.hist{margin-top:8px;padding:10px 12px;border-radius:14px;background:var(--sunk);border:1.5px solid var(--line);font-size:13px}
+.hist.clot{border-color:var(--o);background:var(--o-soft)}
+.hist .ht{font-family:var(--f-disp);font-weight:600;font-size:14px}
+.hist .hl{margin-top:2px}
+.hist .hchips{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.hist .hc{font-family:var(--f-mono);font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--g-soft);color:var(--g);font-weight:600}
+.hist .hc.g1{background:var(--y-soft);color:var(--y)} .hist .hc.g2{background:var(--o-soft);color:var(--o)} .hist .hc.g3{background:var(--r);color:var(--surface)}
+.hist .hw{color:var(--r);font-weight:600;margin-top:4px}
+.new.auto{background:var(--g-soft);color:var(--g)}
+
+/* ===== cute theme ===== */
+.hero{position:relative;overflow:hidden;margin:12px 0 4px;padding:18px 18px 14px;border-radius:28px;color:#fff;
+  background:linear-gradient(135deg,#5dbb8c 0%,#86d3ab 55%,#b6e8cd 100%);box-shadow:0 10px 24px -14px rgba(30,110,70,.55)}
+.hero .dot{position:absolute;border-radius:50%;background:#fff;opacity:.55}
+.hero .d1{width:14px;height:14px;top:14px;right:22%}.hero .d2{width:9px;height:9px;top:46px;right:10px}
+.hero .d3{width:20px;height:20px;bottom:40px;right:30px;opacity:.35}.hero .d4{width:8px;height:8px;bottom:14px;left:46%}
+.hero .d5{width:12px;height:12px;top:60%;left:8px;opacity:.4}
+.hero-row{position:relative;display:flex;gap:14px;align-items:center}
+.mascot{flex:none;width:96px;height:96px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 16px -8px rgba(20,80,50,.5)}
+.hero h1{font-size:21px;line-height:1.35;margin:0;color:#fff;text-shadow:0 1px 0 rgba(20,90,60,.25);text-wrap:balance}
+.hero h1 .em{font-size:.95em}
+.hero p{margin:4px 0 0;font-size:13px;color:rgba(255,255,255,.92)}
+.hero-foot{position:relative;display:flex;gap:8px 12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:12px}
+.hero .today{font-size:13px;color:rgba(255,255,255,.95)} .hero .today b{font-family:var(--f-disp)}
+.hero .owner{display:inline-flex;align-items:center;gap:6px;padding:3px 12px 3px 4px;border-radius:999px;background:rgba(255,255,255,.9);color:#1f3a2f;font-size:12.5px}
+.hero .owner .av{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#dcf2e5;font-size:12px}
+.hero .owner b{font-weight:600}
+.te{font-size:16px;line-height:1}
+.tabbar{border-radius:22px;padding:6px}
+.tabbar button{border-radius:16px}
+.tabbar button[aria-selected="true"]{background:linear-gradient(135deg,#4fae80,#7fcfa5);color:#fff;box-shadow:0 4px 10px -6px rgba(30,110,70,.7)}
+.emo{font-size:20px;line-height:1}
+.step .ic.emo{font-size:17px}
+.card-h .ic.emo{font-size:22px;background:linear-gradient(135deg,var(--primary-soft),#f0faf4)}
+.hico.emo{font-size:15px;background:var(--primary-soft)}
+.sub .hico.emo{font-size:13px}
+.card{border-radius:26px;box-shadow:0 1px 0 rgba(30,90,60,.05),0 10px 24px -16px rgba(30,110,70,.45)}
+.btn{border-radius:999px}
+.btn.primary{background:linear-gradient(135deg,#3f9e74,#6cc396);border-color:transparent;box-shadow:0 6px 14px -8px rgba(30,110,70,.8)}
+.addpt{border-radius:999px}
+.savebar{border-radius:26px}
+.seg span,.pill span{transition:background .15s,border-color .15s,transform .15s}
+.seg input:checked+span,.pill input:checked+span{transform:translateY(-1px)}
+.kpi{border-radius:22px}
+.kpi.hl{background:linear-gradient(135deg,#3f9e74,#7fcfa5);border-color:transparent}
+.bed{border-radius:20px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero{background:linear-gradient(135deg,#1f5a40 0%,#2c7656 60%,#3b8a66 100%)}
+  :root:not([data-theme="light"]) .card-h .ic.emo{background:var(--primary-soft)}}
+:root[data-theme="dark"] .hero{background:linear-gradient(135deg,#1f5a40 0%,#2c7656 60%,#3b8a66 100%)}
+@media (max-width:420px){.mascot{width:76px;height:76px}.mascot svg{width:70px;height:70px}.hero h1{font-size:18.5px}.tabbar button{font-size:14px;gap:4px}.te{font-size:14px}.steps{gap:6px}.step{gap:6px;padding:7px}.step .ic.emo{width:28px;height:28px;font-size:15px}.step b{font-size:12px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="dot d4"></span><span class="dot d5"></span>
+    <div class="hero-row">
+      <div class="mascot" aria-hidden="true">
+        <svg viewBox="0 0 96 96" width="88" height="88">
+          <!-- cute HD machine -->
+          <rect x="50" y="18" width="30" height="58" rx="8" fill="#ffffff" stroke="#7cc9a0" stroke-width="2.5"/>
+          <rect x="55" y="24" width="20" height="13" rx="3" fill="#dff5e9" stroke="#7cc9a0" stroke-width="1.5"/>
+          <path d="M57 31h4l2-4 3 7 2-3h4" fill="none" stroke="#2f8f68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="60" y="42" width="10" height="20" rx="5" fill="#ffd9de" stroke="#e8798b" stroke-width="1.5"/>
+          <circle cx="56" cy="69" r="2" fill="#7cc9a0"/><circle cx="74" cy="69" r="2" fill="#7cc9a0"/>
+          <circle cx="58" cy="80" r="3.5" fill="#bde5cf"/><circle cx="72" cy="80" r="3.5" fill="#bde5cf"/>
+          <!-- tube -->
+          <path d="M50 52c-10 0-12 10-20 10" fill="none" stroke="#e8798b" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- blood-drop buddy -->
+          <path d="M28 34c-7 10-13 16-13 24a13 13 0 0 0 26 0c0-8-6-14-13-24z" fill="#f28b9b"/>
+          <ellipse cx="23" cy="56" rx="2" ry="2.6" fill="#3b2a2e"/><ellipse cx="33" cy="56" rx="2" ry="2.6" fill="#3b2a2e"/>
+          <ellipse cx="19.5" cy="61" rx="2.6" ry="1.6" fill="#ffb3c0"/><ellipse cx="36.5" cy="61" rx="2.6" ry="1.6" fill="#ffb3c0"/>
+          <path d="M25 62c1.8 1.7 4.2 1.7 6 0" stroke="#3b2a2e" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <ellipse cx="23" cy="45" rx="2.4" ry="4" fill="#fff" opacity=".55" transform="rotate(25 23 45)"/>
+          <path d="M80 12l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z" fill="#ffd36e"/>
+          <path d="M14 22l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" fill="#ffd36e"/>
+        </svg>
+      </div>
+      <div>
+        <h1><span class="em" aria-hidden="true">💚</span> เฝ้าระวังการอุดตันของวงจรฟอกเลือด</h1>
+        <p>HD Clot Watch · หน่วยไตเทียม โรงพยาบาลสรรพสิทธิประสงค์</p>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <span class="today">วันนี้: <b id="todayTh"></b></span>
+      <div class="owner"><span class="av" aria-hidden="true">🌿</span>ผู้ดูแล <b>ดรุณี กมลสินธุ์</b></div>
+    </div>
+  </header>
+  <nav class="tabs"><div class="tabbar" role="tablist">
+    <button role="tab" id="tab-board" aria-selected="false" data-view="board"><span class="te" aria-hidden="true">🛏️</span>บอร์ด</button>
+    <button role="tab" id="tab-form" aria-selected="true" data-view="form"><span class="te" aria-hidden="true">📝</span>บันทึก</button>
+    <button role="tab" id="tab-list" aria-selected="false" data-view="list"><span class="te" aria-hidden="true">📋</span>รายการ <span id="countBadge"></span></button>
+    <button role="tab" id="tab-sum" aria-selected="false" data-view="sum"><span class="te" aria-hidden="true">📊</span>สรุป</button>
+  </div></nav>
+  <div class="statusrow"><div class="status" id="status">กำลังเชื่อมต่อฐานข้อมูล…</div><label class="who-chip" for="meSel">ผู้บันทึก <select id="meSel"><option value="">— เลือกชื่อ —</option></select><input type="text" id="meInput" placeholder="พิมพ์ชื่อ-สกุล" maxlength="40" autocomplete="off" hidden></label></div>
+
+  <div class="gate" id="gate" hidden>
+    <h2><span class="hico emo" aria-hidden="true">🔐</span>เข้าสู่ระบบหน่วยไตเทียม</h2>
+    <p class="hint">ใส่รหัสหน่วย (UNIT_KEY) ที่ผู้ดูแลระบบให้ไว้ เครื่องนี้จะจำไว้</p>
+    <div class="field" style="margin-top:10px"><label for="gateKey">รหัสหน่วย</label><input type="text" id="gateKey" autocomplete="off"></div>
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center"><button class="btn primary" type="button" id="gateBtn">เข้าใช้งาน</button><span class="msg" id="gateMsg"></span></div>
+  </div>
+
+  <!-- BOARD -->
+  <div id="view-board" hidden>
+    <div class="board-h"><h2 class="disp"><span class="hico emo" aria-hidden="true">🛏️</span>หน่วยไตเทียม · 18 เตียง</h2>
+      <button class="btn soundbtn" type="button" id="soundBtn" aria-pressed="false">เปิดเสียงเตือน</button></div>
+    <div class="bgrid" id="unitGrid"></div>
+    <div class="board-h"><h2 class="disp"><span class="hico emo" aria-hidden="true">🚑</span>Portable</h2><div class="seg" id="shiftPick"></div></div>
+    <div class="bgrid" id="portGrid"></div>
+    <p class="note">บอร์ดดึงข้อมูลใหม่ทุก 20 วินาที กะพริบเมื่อเป็นสีแดงหรือเลยเวลาประเมิน แตะการ์ดเพื่อเปิดบันทึก เปิดค้างไว้ที่เคาน์เตอร์พยาบาลได้</p>
+  </div>
+
+  <!-- FORM -->
+  <div id="view-form">
+    <div class="editing" id="editBanner" hidden><span id="editText"></span><button class="btn" type="button" id="cancelEdit">ปิดรายการนี้</button></div>
+    <div class="steps">
+      <button type="button" class="step" data-go="sec-screen" id="st-screen"><span class="ic emo" aria-hidden="true">🩺</span><span style="min-width:0"><b>1 SCREEN</b><small>ก่อนฟอกเลือด</small></span></button>
+      <button type="button" class="step" data-go="sec-monitor" id="st-monitor"><span class="ic emo" aria-hidden="true">💓</span><span style="min-width:0"><b>2 MONITOR</b><small>ระหว่างฟอก</small></span></button>
+      <button type="button" class="step" data-go="sec-eval" id="st-eval"><span class="ic emo" aria-hidden="true">🌟</span><span style="min-width:0"><b>3 EVALUATE</b><small>หลังคืนเลือด</small></span></button>
+    </div>
+
+    <form id="crf" novalidate>
+      <!-- SCREEN -->
+      <section class="card" id="sec-screen">
+        <div class="card-h"><span class="ic emo" aria-hidden="true">🩺</span><div><span class="tag">Step 1 · Screen</span><h2>ก่อนเริ่มฟอกเลือด</h2><p>ข้อมูลทั่วไปและปัจจัยเสี่ยง (ส่วนที่ 1–2)</p></div></div>
+        <div class="grid">
+          <div class="field"><span class="lbl">ที่ฟอก *</span><div class="seg" data-name="locType"></div></div>
+          <div class="field"><span class="lbl">รอบการฟอก<span class="new auto" id="shiftAuto" hidden>เลือกจากเวลาเริ่ม</span></span><div class="seg" data-name="shift"></div><span class="hint">รอบ 3 = เคสที่เริ่ม HD ตั้งแต่ 15:30 น. เป็นต้นไป</span></div>
+          <div class="field wide" id="bedWrap"><span class="lbl">เตียง (หน่วยไตเทียม) *</span><div class="bedgrid" id="bedGrid"></div></div>
+          <div class="field" id="slotWrap" hidden><span class="lbl">ลำดับ Portable *</span><div class="seg" data-name="slot"></div></div>
+          <div class="field" id="pwardWrap" hidden><label for="f-pward">หอผู้ป่วย/ICU ที่ไปฟอก</label><input type="text" id="f-pward" name="pward" autocomplete="off"></div>
+          <div class="field"><label for="f-date"><span class="q">1</span>วันที่ฟอกเลือด *</label><input type="date" id="f-date" name="date"></div>
+          <div class="field wide" id="pidField"><label for="f-hn"><span class="q">2</span>ผู้ป่วย: พิมพ์ HN แล้วกดแปลงเป็นรหัสวิจัย *</label>
+            <div class="pidrow" id="hnRow"><input type="text" id="f-hn" inputmode="numeric" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="20" placeholder="HN"><button type="button" class="btn primary" id="hnBtn">🔐 แปลงรหัส</button></div>
+            <span class="msg" id="hnMsg"></span>
+            <div class="pidshow" id="pidShow" hidden><span class="pidtag">รหัสวิจัย <b id="pidCode"></b></span><span class="pidnote" id="pidNote"></span><button type="button" class="linkbtn" id="pidChange">เปลี่ยนผู้ป่วย</button></div>
+            <input type="text" name="pid" id="f-pid" hidden tabindex="-1"><input type="text" name="pinit" id="f-pinit" hidden tabindex="-1">
+            <div class="hist" id="ptHist" hidden></div>
+            <span class="hint">🔒 HN ใช้ค้นหารหัสเท่านั้น ไม่ถูกบันทึกในแอพหรือในชีต · ผู้ป่วยใหม่ได้เลขรันถัดไปอัตโนมัติ</span></div>
+          <div class="field"><label for="f-age"><span class="q">3</span>อายุ (ปี)</label><input type="number" id="f-age" name="age" min="18" max="110" inputmode="numeric"></div>
+          <div class="field"><span class="lbl"><span class="q">4</span>เพศ</span><div class="seg" data-name="sex"></div></div>
+          <div class="field"><span class="lbl"><span class="q">5</span>หน่วยที่ส่งมา</span><div class="seg" data-name="ward"></div></div>
+          <div class="field"><span class="lbl">🫘 Dx ภาวะไต *<span class="new">ใหม่</span></span><div class="seg" data-name="renalDx"></div></div>
+          <div class="field wide"><span class="lbl">📋 Dx โรคทั้งหมด<span class="new">ใหม่</span> <span class="dxcount" id="dxCount"></span></span>
+            <div class="dxwrap"><input type="search" id="dxSearch" placeholder="🔎 พิมพ์ค้นหา Dx เช่น sep, crbsi, chf, lepto" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="dxSug">
+              <div class="dxsug" id="dxSug" role="listbox" hidden></div></div>
+            <div class="dxsel" id="dxSel"></div>
+            <input type="text" id="dxOther" hidden tabindex="-1">
+            <input type="text" name="dxText" id="f-dx" hidden tabindex="-1"><input type="text" name="dxGroups" id="f-dxg" hidden tabindex="-1">
+          </div>
+          <div class="field"><span class="lbl"><span class="q">6</span>ใส่ ETT ขณะฟอก<span class="new">ใหม่</span></span><div class="seg" data-name="ett"></div></div>
+        </div>
+        <div class="sub"><span class="hico emo" aria-hidden="true">🛡️</span>ปัจจัยก่อนเริ่มฟอก</div>
+        <div class="grid">
+          <div class="field wide"><span class="lbl"><span class="q">7</span>เคยอุดตัน (Grade ≥ 2) ในการฟอกครั้งก่อน<span class="new">ใหม่</span><span class="new auto" id="prevAuto" hidden>เติมจากประวัติ</span></span><div class="seg" data-name="prevClot"></div></div>
+          <div class="field"><label for="f-hct"><span class="q">8</span>Hct ภายใน 48 ชม. (%)<span class="new">ใหม่</span></label><input type="number" id="f-hct" name="hct" step="0.1" min="5" max="70" inputmode="decimal"></div>
+          <div class="field"><label for="f-plt"><span class="q">9</span>เกล็ดเลือด 48 ชม. (×10³/µL)<span class="new">ใหม่</span></label><input type="number" id="f-plt" name="plt" min="1" max="1500" inputmode="numeric"></div>
+          <div class="field"><span class="lbl"><span class="q">10</span>Vascular access</span><div class="seg" data-name="access"></div></div>
+          <div class="field"><span class="lbl"><span class="q">11</span>ตำแหน่ง catheter</span><div class="seg" data-name="cathSite"></div></div>
+          <div class="field"><span class="lbl">เครื่องไตเทียม</span><div class="seg" data-name="machine"></div></div>
+          <div class="field"><span class="lbl"><span class="q">12</span>ยาต้านการแข็งตัวของเลือด</span><div class="seg" data-name="anticoag"></div></div>
+          <div class="field" id="heparinWrap"><label for="f-hepU">ขนาด heparin รวม (unit)</label><input type="number" id="f-hepU" name="heparinU" min="0" inputmode="numeric"></div>
+          <div class="field"><label for="f-rxh"><span class="q">13</span>เวลาฟอกที่สั่ง (ชม.)</label><input type="number" id="f-rxh" name="rxHours" step="0.5" min="0.5" max="12" inputmode="decimal"></div>
+          <div class="field"><label for="f-uf"><span class="q">14</span>UF goal (mL)</label><input type="number" id="f-uf" name="ufGoal" min="0" max="8000" inputmode="numeric"></div>
+          <div class="field"><label for="f-bfrset"><span class="q">15</span>แผน BFR (mL/min)</label><input type="number" id="f-bfrset" name="bfrSet" min="50" max="500" inputmode="numeric"><span class="hint">ใช้คำนวณเกณฑ์ BFR/2 ± 50 และ BFR ลดลง 10%</span></div>
+        </div>
+        <div class="risk" id="riskBox" hidden><b>ปัจจัยที่ควรเฝ้าระวังเป็นพิเศษ</b><div class="chips" id="riskChips"></div></div>
+      </section>
+
+      <!-- MONITOR -->
+      <section class="card" id="sec-monitor">
+        <div class="card-h"><span class="ic emo" aria-hidden="true">💓</span><div><span class="tag">Step 2 · Monitor → Trigger → Act</span><h2>ระหว่างฟอกเลือด</h2><p>ประเมินอย่างน้อยทุก 30 นาที และเมื่อมีสัญญาณเตือน <span id="alertNote"></span></p></div></div>
+        <div class="now" id="nowCard" hidden><span class="lamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5M12 16.5v.5"/><circle cx="12" cy="12" r="9"/></svg></span><div><div class="big" id="nowBig"></div><div class="sm" id="nowSm"></div></div></div>
+        <div class="startcard" id="startCard">
+          <label for="f-start" class="sc-l"><span aria-hidden="true">⏰</span> เวลาเริ่ม HD *</label>
+          <div class="sc-row"><input type="time" id="f-start" name="startTime"><button type="button" class="btn" id="startNow">▶️ เริ่มตอนนี้</button></div>
+          <span class="hint" id="startHint">ลงเวลาเริ่มก่อน แล้วกด “➕ เพิ่มจุดเวลา” ทุกรอบที่ประเมิน แอพจะบอกว่า HD มาแล้วกี่ ชม. กี่นาที</span>
+        </div>
+        <details class="ref"><summary>ดูเกณฑ์ 4 สี (Checklist ส่วนที่ 4)</summary>
+          <div class="reftbl"><table>
+            <thead><tr><th style="background:none;color:var(--muted)"></th><th class="c0">สีเขียว (ปกติ)</th><th class="c1">สีเหลือง (เฝ้าระวัง)</th><th class="c2">สีส้ม (เฝ้าระวังใกล้ชิด)</th><th class="c3">สีแดง (คืนเลือด)</th></tr></thead>
+            <tbody>
+              <tr><td>VP (mmHg)</td><td>BFR/2 ± 50 ไม่เปลี่ยนแปลง</td><td>&gt; 150–180</td><td>&gt; 180–210</td><td>&gt; 210–240</td></tr>
+              <tr><td>TMP เพิ่มขึ้น (mmHg)</td><td>&lt; 40</td><td>&gt; 40–80</td><td>&gt; 80–120</td><td>&gt; 120–160</td></tr>
+              <tr><td>Clot grade</td><td>0 (ไม่มี fibrin/clot)</td><td>1 (มี fibrin บางส่วน)</td><td>2 (มี fibrin/clot ชัดเจน)</td><td>3 (มี clot มาก/อุดตัน)</td></tr>
+              <tr><td>การดำเนินการ</td><td><b>ฟอกต่อ (Continue)</b><br>• เฝ้าระวังต่อเนื่อง<br>• บันทึกตามรอบ</td><td><b>แก้ไขตาม protocol และประเมินซ้ำ 5–10 นาที</b><br>• Flush NSS<br>• ประเมินค่าเครื่อง HD<br>• ประเมิน clot อีกครั้ง</td><td><b>แก้ไขด่วน และประเมินซ้ำ 5–10 นาที</b><br>• Flush ถี่ขึ้น<br>• เฝ้าระวังใกล้ชิดเพิ่มขึ้น<br>• ประเมินค่าเครื่อง HD และ clot</td><td><b>พบข้อใดข้อหนึ่ง คืนเลือด (Return Blood)</b><br>• หยุดการรักษาทันที<br>• ดำเนินการคืนเลือดตาม protocol<br>• เปลี่ยน Circuit</td></tr>
+            </tbody>
+          </table></div>
+          <p class="note" style="margin-top:0">พบข้อใดข้อหนึ่งในแต่ละสี ให้ดำเนินการตามแผน แอพเลือกสีที่รุนแรงที่สุดให้อัตโนมัติ</p>
+        </details>
+        <div id="monRows" class="timeline"></div>
+        <div class="empty-mon" id="monEmpty">ยังไม่มีจุดเวลา กด “➕ เพิ่มจุดเวลา” เมื่อฟอกครบ 15 นาที เพื่อบันทึกค่าตั้งต้น</div>
+        <button class="addpt" type="button" id="addPoint">➕ เพิ่มจุดเวลา</button>
+        <div id="trendWrap" class="trend" hidden>
+          <div class="legend"><b class="disp">แนวโน้ม</b><span class="sw vp"></span>ΔVP <span class="sw tmp"></span>ΔTMP <span class="note" style="margin:0">mmHg เทียบจุดแรก</span></div>
+          <svg id="trend" viewBox="0 0 600 180" role="img" aria-label="แนวโน้ม ΔVP และ ΔTMP ระหว่างฟอก"></svg>
+        </div>
+        <div class="sub"><span class="hico emo" aria-hidden="true">📈</span>สรุปค่าระหว่างฟอก</div>
+        <div class="grid">
+          <div class="field wide"><div class="autosum" id="autoSum">
+            <div class="as-h">⏱️ แอพสรุปให้จากจุดเวลา ไม่ต้องกรอก</div>
+            <div class="as-grid">
+              <div><span class="q">16</span>BFR ต่ำสุด<b id="as-bfr">–</b><small>mL/min</small></div>
+              <div><span class="q">18</span>VP สูงสุด<b id="as-vp">–</b><small>mmHg</small></div>
+              <div>TMP สูงสุด<b id="as-tmp">–</b><small>mmHg</small></div>
+              <div>ΔTMP สูงสุด<b id="as-dtmp">–</b><small>mmHg จากจุดแรก</small></div>
+            </div></div>
+            <input type="number" name="bfrMin" hidden tabindex="-1"><input type="number" name="vpMax" hidden tabindex="-1"><input type="number" name="tmpMax" hidden tabindex="-1"><input type="number" name="dtmpMax" hidden tabindex="-1">
+          </div>
+          <div class="field wide"><span class="lbl"><span class="q">17</span>ให้เลือด/เกล็ดเลือดผ่านวงจร<span class="new">ใหม่</span></span><div class="seg" data-name="transfusion"></div></div>
+        </div>
+      </section>
+
+      <!-- EVALUATE -->
+      <section class="card" id="sec-eval">
+        <div class="card-h"><span class="ic emo" aria-hidden="true">🌟</span><div><span class="tag">Step 3 · Evaluate</span><h2>หลังคืนเลือด</h2><p>ประเมินตาม Visual Guide: Circuit Clotting Grade 0–3</p></div></div>
+        <div class="field wide"><span class="lbl"><span class="q">19</span>Circuit Clotting Grade สูงสุดที่พบ *</span>
+          <div class="gcards" id="gradeCards"></div>
+        </div>
+        <div class="sub"><span class="hico emo" aria-hidden="true">🔗</span>ผลกระทบต่อวงจร</div>
+        <div class="grid">
+          <div class="field"><span class="lbl"><span class="q">21</span>Circuit loss (สูญเสียวงจร/คืนเลือดไม่ได้) *</span><div class="seg" data-name="noReturn"></div></div>
+          <div class="field"><span class="lbl"><span class="q">20</span>เปลี่ยน dialyzer ก่อนเวลา *</span><div class="seg" data-name="changed"></div></div>
+          <div class="field"><span class="lbl">เปลี่ยน bloodline</span><div class="seg" data-name="changeLine"></div></div>
+          <div class="field wide" id="changeReasonWrap"><label for="f-chreason">เหตุผลที่เปลี่ยน</label><input type="text" id="f-chreason" name="changeReason" autocomplete="off"></div>
+          <div class="field wide startcard" id="endCard">
+            <label for="f-end" class="sc-l"><span class="q">22</span>⏹️ เวลาเลิก HD (เริ่มคืนเลือด)</label>
+            <div class="sc-row"><input type="time" id="f-end" name="endTime"><button type="button" class="btn" id="endNow">⏹️ เลิกตอนนี้</button></div>
+            <div class="elapsed"><label class="ell" for="f-acth">ฟอกจริง</label><input type="number" id="f-acth" inputmode="numeric" min="0" max="12" placeholder="0"><span class="u">ชม.</span><input type="number" id="f-actm" inputmode="numeric" min="0" max="59" placeholder="0"><span class="u">นาที</span></div>
+            <input type="number" name="actualMin" id="f-actual" hidden tabindex="-1">
+            <span class="esrc" id="actSrc">ลงเวลาเลิก แอพคำนวณเวลาฟอกจริงให้ หรือกรอก ชม./นาที จากหน้าจอเครื่อง</span>
+            <div class="cmp" id="actCmp" hidden></div>
+          </div>
+          <div class="field wide"><span class="lbl">ฟอกครบตามเวลาที่สั่งหรือไม่<span class="new auto" id="earlyAuto" hidden>คำนวณให้</span></span><div class="seg" data-name="earlyStop"></div></div>
+          <div class="field wide" id="reasonWrap"><span class="lbl">สาเหตุที่ฟอกไม่ครบเวลา *</span><div class="seg" data-name="earlyReasonCode"></div>
+            <input type="text" id="f-reason" name="earlyReason" autocomplete="off" placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)"></div>
+        </div>
+        <div class="outcome" id="outcomeBox" hidden></div>
+      </section>
+
+      <div class="savebar" id="saveBar">
+        <button class="btn primary" type="submit" id="saveBtn">💾 บันทึกข้อมูล</button>
+        <button class="btn" type="button" id="resetBtn">🧹 ล้างฟอร์ม</button>
+        <span class="msg" id="formMsg" role="status">บันทึกระหว่างฟอกได้เรื่อย ๆ</span>
+      </div>
+    </form>
+  </div>
+
+  <!-- LIST -->
+  <div id="view-list" hidden>
+    <div class="tools">
+      <input type="text" id="search" placeholder="ค้นหารหัสหรืออักษรย่อ" autocomplete="off">
+      <span class="note" style="margin:0">แตะรายการเพื่อเปิดต่อหรือแก้ไข</span>
+    </div>
+    <div class="rlist" id="rows"></div>
+    <div class="empty" id="listEmpty">ยังไม่มีข้อมูล เริ่มบันทึกได้ที่แท็บ “บันทึก” รายการแต่ละครั้งที่ฟอกจะแสดงที่นี่</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div id="view-sum" hidden>
+    <div class="kpis">
+      <div class="kpi hl"><div class="v" id="k-rate">–</div><div class="k">อุดตันต่อ 100 HD sessions</div></div>
+      <div class="kpi"><div class="v" id="k-n">0</div><div class="k">sessions ที่ประเมินครบ</div></div>
+      <div class="kpi"><div class="v" id="k-ev">0</div><div class="k">เกิดการอุดตัน</div></div>
+      <div class="kpi"><div class="v" id="k-pt">0</div><div class="k">ผู้ป่วย (รหัสไม่ซ้ำ)</div></div>
+      <div class="kpi"><div class="v" id="k-mon">–</div><div class="k">มีค่าตามเวลา ≥ 2 จุด</div></div>
+      <div class="kpi"><div class="v" id="k-target">0%</div><div class="k">ความคืบหน้าสู่ 1,030 sessions</div><div class="prog"><i id="k-prog" style="width:0"></i></div></div>
+    </div>
+    <h3><span class="hico emo" aria-hidden="true">🍩</span>สัดส่วน Clot Grade</h3>
+    <div class="gbar" id="gbar"></div>
+    <div class="glegend" id="glegend"></div>
+    <h3><span class="hico emo" aria-hidden="true">📊</span>อัตราการอุดตันแยกตามปัจจัย</h3>
+    <div class="tablewrap"><table class="ft">
+      <thead><tr><th>ปัจจัย</th><th>กลุ่ม</th><th class="num">n</th><th class="num">อุดตัน</th><th class="num">ต่อ 100</th></tr></thead>
+      <tbody id="factorRows"></tbody>
+    </table></div>
+    <p class="note">นับเฉพาะ sessions ที่ประเมินครบแล้ว “อุดตัน” = Grade ≥ 2 หรือ circuit loss หรือเปลี่ยน dialyzer/bloodline ก่อนเวลา ตารางนี้ใช้ติดตามระหว่างเก็บข้อมูล (ยังไม่ปรับอิทธิพลตัวแปรอื่น)</p>
+    <h3><span class="hico emo" aria-hidden="true">🔔</span>ตั้งค่าการเตือน</h3>
+    <div class="setting"><label class="switch"><input type="checkbox" id="alertToggle"> เปิดการเตือน (สีใน Step 2 + ส่ง LINE)</label><input type="text" id="adminKey" placeholder="รหัสผู้ดูแล (ADMIN_KEY)" autocomplete="off" style="max-width:220px"><span class="msg" id="alertMsg"></span></div>
+    <p class="note">ใช้กับทุกเครื่อง ต้องใส่รหัสผู้ดูแลจึงเปลี่ยนได้ ปิดในระยะที่ 1 (ใช้ checklist กระดาษ) และเปิดในระยะที่ 3</p>
+    <h3><span class="hico emo" aria-hidden="true">📥</span>ส่งออกข้อมูล</h3>
+    <div class="setting">
+      <button class="btn" type="button" id="csvBtn">CSV ข้อมูลรายครั้ง</button>
+      <button class="btn" type="button" id="csvMonBtn">CSV ค่าตามเวลา</button>
+      <span class="msg" id="csvMsg"></span>
+    </div>
+    <p class="note">ใช้ชื่อตัวแปรภาษาอังกฤษ เปิดใน Excel, SPSS หรือ R ได้ ไฟล์ค่าตามเวลามี 1 แถวต่อ 1 จุดเวลา เชื่อมกับข้อมูลรายครั้งด้วย session_id</p>
+  </div>
+  <footer class="foot">💚 HD Clot Watch · หน่วยไตเทียม รพ.สรรพสิทธิประสงค์ · ผู้ดูแล <b>ดรุณี กมลสินธุ์</b></footer>
+</div>
+
+<script>
+(function(){
+// ====== ตั้งค่า: วาง URL ของ Apps Script Web App ที่ deploy แล้ว (ลงท้ายด้วย /exec) ======
+const API_URL="https://script.google.com/macros/s/AKfycbwrIDnZKKhpmOUne8JyHpmINaguDcESRHbc9oNK9hhK4MbWgajFMKIQH2dGppZJz397xQ/exec";
+const UNIT_BEDS=18, PORT_SLOTS=6;
+// เวลาจริง (HH:MM) → นาทีที่นับจากเวลาเริ่ม HD
+const hm2m=t=>{const m=/^(\d{1,2}):(\d{2})/.exec(t||"");return m?(+m[1])*60+(+m[2]):null};
+const z2=n=>String(n).padStart(2,"0");
+function minFrom(at){const s0=hm2m(form.elements.startTime.value),a=hm2m(at);if(s0==null||a==null)return null;let d=a-s0;if(d<0)d+=1440;return d}
+function atFrom(min){const s0=hm2m(form.elements.startTime.value);if(s0==null||min==null)return "";const t=(s0+min)%1440;return z2(Math.floor(t/60))+":"+z2(t%60)}
+function fmtDur(m){if(m==null)return "";const h=Math.floor(m/60),r=m%60;return "นาทีที่ "+m+(h?" ("+h+" ชม."+(r?" "+r+" นาที":"")+")":"")}
+// ====== รายชื่อพยาบาลหน่วยไตเทียม (แก้ไข/เพิ่มชื่อได้ที่นี่) ======
+const NURSES=["นางสิรินาฏ ระวีวรรณ","นางปาริฉัตร บรรเทือง","น.ส.อรวราณิชญ์ ศักดี","นางมาลี สอแสง","นางพัชรกร สงค์แก้ว",
+  "น.ส.สุมาลัย ขัมภรัตน์","นางจิตรา มาถาวร","น.ส.ดรุณี กมลสินธุ์","น.ส.ภัทรานิษฐ์ ปทุมทอง","น.ส.สุภาพร พูลทรัพย์",
+  "นางวรัญญู แสงก่ำ","นางสุธิดา เทียนกุล","น.ส.อรพรรณ อุทธา","น.ส.ศศิวรรณ เบ้าคำ","น.ส.จรรยรัศมิ์ กุลณัชสรณ์",
+  "น.ส.อัญรินทร์ รุ่งพีรวรศักดิ์","นางสมคิด ตาทิพย์","น.ส.ปรีชยา ปาคำดี","น.ส.สุภัสสร วงค์ประเทศ","นายอดิศร ศรีพินทร์"];
+const OPTS={
+  locType:[["unit","หน่วยไตเทียม"],["portable","Portable"]],
+  shift:[["r1","รอบ 1"],["r2","รอบ 2"],["r3","รอบ 3"]],
+  slot:[["P1","P1"],["P2","P2"],["P3","P3"],["P4","P4"],["P5","P5"],["P6","P6"]],
+  sex:[["M","ชาย"],["F","หญิง"]],
+  ward:[["ICU","ICU"],["IPD","หอผู้ป่วยใน"],["OPD","ผู้ป่วยนอก"]],
+  renalDx:[["AKI","AKI"],["ESRD","ESRD"]],
+  ett:[["1","ใช่"],["0","ไม่ใช่"]],
+  prevClot:[["1","ใช่"],["0","ไม่ใช่"],["first","ฟอกครั้งแรก"]],
+  access:[["catheter","Catheter"],["AVF","AVF"],["AVG","AVG"]],
+  cathSite:[["jugular","Jugular"],["femoral","Femoral"],["subclavian","Subclavian"],["none","ไม่ใช้"]],
+  anticoag:[["heparin","Heparin"],["free","Heparin-free"]],
+  transfusion:[["none","ไม่ให้"],["PRC","PRC"],["platelet","เกล็ดเลือด"],["other","อื่น ๆ"]],
+  grade:[["0","0"],["1","1"],["2","2"],["3","3"]],
+  changed:[["0","ไม่มี"],["1","มี"]],
+  changeLine:[["0","ไม่มี"],["1","มี"]],
+  noReturn:[["0","ไม่มี"],["1","มี"]],
+  earlyStop:[["0","ครบตามสั่ง"],["1","ไม่ครบ (หยุดก่อนเวลา)"]],
+  earlyReasonCode:[["clot","วงจรอุดตัน/เปลี่ยน circuit"],["hypotension","ความดันต่ำ/สัญญาณชีพไม่คงที่"],["access","Vascular access มีปัญหา"],["patient","อาการผู้ป่วย/ส่งตรวจ/ทำหัตถการ"],["md","แพทย์สั่งหยุด"],["machine","เครื่องขัดข้อง"],["other","อื่น ๆ"]],
+  machine:[["F4008S","F4008S"],["Nikkiso","Nikkiso"],["other","อื่น ๆ"]]
+};
+const GRADES=[
+  {n:"No clot",th:"ปกติ",b:["ไม่พบ fibrin/clot","ไม่มี blood stasis","Pressure อยู่ในเกณฑ์"]},
+  {n:"Mild",th:"เล็กน้อย",b:["พบ fibrin/clot เล็กน้อย ส่วนใหญ่ที่ venous chamber หรือสายเลือด","ยังไม่มีผลต่อการไหลเวียน"]},
+  {n:"Moderate",th:"ปานกลาง",b:["พบ fibrin/clot ชัดเจน อาจมี blood stasis","อาจเริ่มมีผลต่อการไหล หรือ pressure trend ผิดปกติ","ดำเนินการตาม Algorithm"]},
+  {n:"Severe",th:"รุนแรง",b:["พบ clot มาก อุดตันใน dialyzer หรือ venous chamber","Circuit ใช้ต่อไม่ได้ ต้องเปลี่ยน circuit"]}];
+const LABEL={};for(const k in OPTS){LABEL[k]=Object.fromEntries(OPTS[k])}
+const NUMS=["bed","age","hct","plt","heparinU","rxHours","ufGoal","bfrSet","bfrMin","vpMax","tmpMax","dtmpMax","actualMin"];
+const TEXTS=["date","pid","pinit","dxText","dxGroups","endTime","earlyReason","changeReason","startTime","pward"];
+const CHOICES=Object.keys(OPTS);
+const COLS=["date","shift","locType","bed","slot","pward","startTime","pid","age","sex","ward","renalDx","dxText","dxGroups","ett","prevClot","hct","plt","access","machine","cathSite","anticoag","heparinU","rxHours","ufGoal","bfrSet","bfrMin","transfusion","vpMax","tmpMax","dtmpMax","grade","noReturn","changed","changeLine","changeReason","actualMin","endTime","actualManual","earlyStop","earlyReasonCode","earlyReason","maxLevel","clot"];
+
+const $=s=>document.querySelector(s);
+const form=$("#crf");
+const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
+
+// segmented controls
+document.querySelectorAll(".seg[data-name]").forEach(seg=>{
+  const name=seg.dataset.name;
+  OPTS[name].forEach(([v,t],i)=>{
+    const l=el("label");const inp=el("input");inp.type="radio";inp.name=name;inp.value=v;inp.id="f-"+name+"-"+i;
+    l.append(inp,el("span",null,t));seg.append(l);
+  });
+});
+for(let b=1;b<=UNIT_BEDS;b++){const l=el("label");const i=el("input");i.type="radio";i.name="bed";i.value=String(b);i.id="f-bed-"+b;l.append(i,el("span",null,String(b)));$("#bedGrid").append(l)}
+// grade cards (Visual Guide)
+function dialyzerSvg(g){
+  const ns="http://www.w3.org/2000/svg";const s=document.createElementNS(ns,"svg");s.setAttribute("viewBox","0 0 34 72");s.setAttribute("aria-hidden","true");
+  const add=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);s.append(e);return e};
+  add("rect",{x:6,y:2,width:22,height:8,rx:3,style:"fill:var(--r);opacity:.55"});
+  add("rect",{x:4,y:9,width:26,height:54,rx:6,style:"fill:var(--surface);stroke:var(--line);stroke-width:2"});
+  const reds=[0,2,5,8][g];
+  for(let i=0;i<8;i++){const red=(i*3)%8<reds;add("line",{x1:8+i*2.6,y1:13,x2:8+i*2.6,y2:59,style:"stroke:"+(red?(g===3?"#7a1022":"var(--r)"):"var(--line)")+";stroke-width:1.6;stroke-linecap:round"})}
+  if(g>=2)add("ellipse",{cx:17,cy:g===3?40:50,rx:g===3?11:6,ry:g===3?18:5,style:"fill:"+(g===3?"#7a1022":"var(--r)")+";opacity:"+(g===3?.85:.55)});
+  add("rect",{x:6,y:62,width:22,height:8,rx:3,style:"fill:var(--r);opacity:.55"});
+  return s;
+}
+GRADES.forEach((G,i)=>{
+  const l=el("label","gcard g"+i);const inp=el("input");inp.type="radio";inp.name="grade";inp.value=String(i);inp.id="f-grade-"+i;
+  const inn=el("span","in");inn.append(dialyzerSvg(i));
+  const tx=el("span");tx.append(el("b",null,"Grade "+i),el("em",null,G.n+" ("+G.th+")"));
+  const ul=el("ul");G.b.forEach(t=>ul.append(el("li",null,t)));tx.append(ul);inn.append(tx);
+  l.append(inp,inn);$("#gradeCards").append(l);
+});
+
+let records=[];let editingId=null;
+let mon=[]; // [{min,bfr,ap,vp,tmp,alarm,pump,acBad,clot,actions}]
+let alertsOn=true;
+const ACTS=[["patient","ประเมินผู้ป่วย (อาการ/สัญญาณชีพ)"],["access","ตรวจสอบ vascular access"],["line","ตรวจสอบสายเลือดและตัวกรอง"],["machine","ตรวจสอบค่าที่เครื่อง HD และ alarms"],["position","ปรับท่านอน/ตำแหน่งแขน แก้สายที่พับ งอ กดทับ"],["flush","พิจารณาล้างสาย (saline flush)"],["anticoag","ปรับ/ให้ anticoagulation ตามแผนการรักษา"],["md","รายงานแพทย์/ขอคำปรึกษา"],["return","คืนเลือด/เปลี่ยน circuit"]];
+const MK=[["bfr","EFF BFR","mL/min"],["vp","VP","mmHg"],["tmp","TMP","mmHg"]];
+const LV=[
+ {n:"สีเขียว · ปกติ",s:"เขียว",p:"ฟอกต่อ (Continue) · เฝ้าระวังต่อเนื่อง · บันทึกตามรอบ"},
+ {n:"สีเหลือง · เฝ้าระวัง",s:"เหลือง",p:"แก้ไขตาม protocol และประเมินซ้ำ 5–10 นาที: Flush NSS · ประเมินค่าเครื่อง HD · ประเมิน clot อีกครั้ง"},
+ {n:"สีส้ม · เฝ้าระวังใกล้ชิด",s:"ส้ม",p:"แก้ไขด่วนและประเมินซ้ำ 5–10 นาที: Flush ถี่ขึ้น · เฝ้าระวังใกล้ชิดเพิ่มขึ้น · ประเมินค่าเครื่อง HD และ clot"},
+ {n:"สีแดง · คืนเลือด",s:"แดง",p:"คืนเลือด (Return Blood): หยุดการรักษาทันที · ดำเนินการคืนเลือดตาม protocol · เปลี่ยน Circuit"}];
+const num=v=>v===""||v==null||isNaN(Number(v))?null:Number(v);
+const byMin=()=>mon.filter(p=>p.min!=null).slice().sort((a,b)=>a.min-b.min);
+function base(){return byMin().find(p=>p.vp!=null||p.tmp!=null)||mon.find(p=>p.vp!=null||p.tmp!=null)||null}
+function deltas(p){const b=base();if(!b)return {dvp:null,dtmp:null};return {dvp:(p.vp!=null&&b.vp!=null)?p.vp-b.vp:null,dtmp:(p.tmp!=null&&b.tmp!=null)?p.tmp-b.tmp:null}}
+const fmtD=v=>v==null?"–":(v>0?"+":"")+v;
+const hasData=p=>p.vp!=null||p.tmp!=null||p.bfr!=null||p.alarm||p.pump||p.acBad||(p.clot||0)>0||!!(p.otherTrig||"").trim();
+// เกณฑ์ตาม Nursing Circuit Clotting Surveillance Checklist
+function evaluate(p){
+  const bfrSet=num(form.elements.bfrSet.value);
+  const t=[];const {dtmp}=deltas(p);
+  if(bfrSet&&p.bfr!=null&&p.bfr<bfrSet*0.9)t.push("EFF BFR ลดลง > 10% ของ BFR ที่ตั้ง");
+  const ref=(p.bfr??bfrSet);const half=ref?ref/2:null;
+  const lo=half!=null?Math.max(0,Math.round(half-50)):null,hi=half!=null?Math.round(half+50):null;
+  if(half!=null&&p.vp!=null&&Math.abs(p.vp-half)>50)t.push("VP ผิดปกติ: "+p.vp+" (ควรอยู่ "+lo+"–"+hi+")");
+  if(dtmp!=null&&dtmp>=40)t.push("TMP เพิ่มขึ้น "+dtmp+" จากจุดแรก (≥ 40)");
+  const seq=byMin();const i=seq.indexOf(p);
+  if(i>=2){const up=k=>seq[i-2][k]!=null&&seq[i-1][k]!=null&&p[k]!=null&&seq[i-2][k]<seq[i-1][k]&&seq[i-1][k]<p[k];
+    if(up("vp")||up("tmp"))t.push("VP/TMP เพิ่มขึ้นต่อเนื่อง")}
+  if(p.alarm)t.push("Pressure alarm เกิดซ้ำ");
+  if((p.clot||0)>=1)t.push("พบ fibrin หรือ clot ในสายเลือด/ตัวกรอง");
+  if(p.pump)t.push("Blood pump interruption");
+  if(p.acBad)t.push("Anticoagulation therapy ไม่เป็นไปตามแผน");
+  if(p.otherTrig&&p.otherTrig.trim())t.push("อื่น ๆ: "+p.otherTrig.trim());
+  const vpL=p.vp==null?0:p.vp>210?3:p.vp>180?2:p.vp>150?1:0;
+  const tmL=dtmp==null?0:dtmp>120?3:dtmp>80?2:dtmp>=40?1:0;
+  return {level:Math.max(vpL,tmL,Number(p.clot)||0),triggers:t};
+}
+function prevOf(p){const s=byMin();const i=s.indexOf(p);return i>0?s[i-1]:null}
+
+function renderMon(){
+  const box=$("#monRows");box.textContent="";
+  $("#monEmpty").hidden=mon.length>0;
+  mon.forEach((p,i)=>{
+    if(!Array.isArray(p.actions))p.actions=[];
+    const row=el("div","pt");row.dataset.i=i;
+    const rail=el("div","pt-rail");rail.append(el("span","pt-dot"),el("span","pt-line"));
+    const body=el("div","pt-body");
+    const head=el("div","pt-head");
+    const mb=el("div","minbox");
+    const tl=el("label","tl","เวลา");tl.htmlFor="m-"+i+"-at";
+    const mi=el("input");mi.type="time";mi.id="m-"+i+"-at";mi.value=p.at||atFrom(p.min);
+    const ew=el("div","elapsed");
+    const el1=el("label","ell","HD มาแล้ว");el1.htmlFor="m-"+i+"-eh";
+    const eh=el("input");eh.type="number";eh.id="m-"+i+"-eh";eh.inputMode="numeric";eh.min="0";eh.max="12";eh.placeholder="0";eh.setAttribute("aria-label","HD มาแล้ว ชั่วโมง");
+    const em=el("input");em.type="number";em.id="m-"+i+"-em";em.inputMode="numeric";em.min="0";em.max="59";em.placeholder="0";em.setAttribute("aria-label","HD มาแล้ว นาที");
+    const src=el("span","esrc");
+    const fillEl=()=>{if(p.min==null){eh.value="";em.value=""}else{eh.value=Math.floor(p.min/60);em.value=p.min%60}};
+    const showSrc=()=>{src.textContent=p.min==null?(mi.value?"ใส่เวลาเริ่ม HD หรือกรอกเวลาที่ฟอกมาแล้วจากหน้าจอเครื่อง":""):(p.minManual?"✍️ กรอกจากหน้าจอเครื่อง · นาทีที่ "+p.min:"⏱️ คำนวณจากเวลาเริ่ม · นาทีที่ "+p.min+" (แก้ได้)");
+      src.classList.toggle("warn",p.min==null&&!!mi.value)};
+    mi.addEventListener("input",()=>{p.at=mi.value||null;if(!p.minManual){p.min=minFrom(p.at);fillEl()}showSrc();updateDeltas()});
+    const onEl=()=>{const h=eh.value===""?null:Number(eh.value),m=em.value===""?null:Number(em.value);
+      if(h==null&&m==null){p.minManual=false;p.min=minFrom(p.at)}else{p.minManual=true;p.min=(h||0)*60+(m||0)}
+      showSrc();updateDeltas()};
+    eh.addEventListener("input",onEl);em.addEventListener("input",onEl);
+    // ไม่มีเวลาเริ่ม HD: คิดย้อนให้ = เวลาจริง − เวลาที่ฟอกมาแล้ว (ทำเมื่อกรอกเสร็จ เพื่อไม่ขัดจังหวะการพิมพ์)
+    const backfill=()=>{if(!form.elements.startTime.value&&p.at&&p.minManual&&p.min!=null){const a=hm2m(p.at);const st=(((a-p.min)%1440)+1440)%1440;
+      form.elements.startTime.value=z2(Math.floor(st/60))+":"+z2(st%60);form.elements.startTime.dispatchEvent(new Event("input",{bubbles:true}))}};
+    ew.addEventListener("focusout",e=>{if(!ew.contains(e.relatedTarget)){backfill();if(!p.minManual)fillEl()}});
+    if(p.min==null&&p.at)p.min=minFrom(p.at);
+    fillEl();showSrc();
+    ew.append(el1,eh,el("span","u","ชม."),em,el("span","u","นาที"));
+    mb.append(tl,mi,ew,src);
+    head.append(mb,el("span","lvbadge"),el("span","delta"));
+    const rm=el("button","rm","ลบจุดนี้");rm.type="button";rm.addEventListener("click",()=>{mon.splice(i,1);renderMon()});head.append(rm);
+    body.append(head);
+    const g=el("div","pt-grid");
+    MK.forEach(([k,t,u])=>{
+      const f=el("div","field");const l=el("label",null,t+" ("+u+")");l.htmlFor="m-"+i+"-"+k;
+      const inp=el("input");inp.type="number";inp.id="m-"+i+"-"+k;inp.inputMode="numeric";inp.value=p[k]??"";
+      inp.addEventListener("input",()=>{p[k]=num(inp.value);updateDeltas()});f.append(l,inp);g.append(f);
+    });
+    const cf=el("div","field");const cl=el("label",null,"Clot grade");cl.htmlFor="m-"+i+"-clot";
+    const cs=el("select");cs.id="m-"+i+"-clot";[["0","0 ไม่มี"],["1","1 บางส่วน"],["2","2 ชัดเจน"],["3","3 อุดตัน"]].forEach(([v,t])=>{const o=el("option",null,t);o.value=v;cs.append(o)});
+    cs.value=String(p.clot||0);cs.addEventListener("change",()=>{p.clot=Number(cs.value);updateDeltas()});cf.append(cl,cs);g.append(cf);
+    body.append(g);
+    const fl=el("div","flags");
+    [["alarm","Pressure alarm เกิดซ้ำ"],["pump","Blood pump interruption"],["acBad","Anticoagulation ไม่เป็นไปตามแผน"]].forEach(([k,t])=>{
+      const c=el("label","pill warn");const cb=el("input");cb.type="checkbox";cb.id="m-"+i+"-"+k;cb.checked=!!p[k];
+      cb.addEventListener("change",()=>{p[k]=cb.checked?1:0;updateDeltas()});c.append(cb,el("span",null,t));fl.append(c)});
+    const ot=el("input");ot.type="text";ot.className="othertxt";ot.id="m-"+i+"-otrig";ot.placeholder="สัญญาณเตือนอื่น ๆ (ระบุ)";ot.value=p.otherTrig||"";ot.autocomplete="off";
+    ot.addEventListener("input",()=>{p.otherTrig=ot.value;updateDeltas()});fl.append(ot);
+    body.append(fl);
+    body.append(el("div","eval"));
+    const ad=el("details","acts");if(p.actions.length)ad.open=true;
+    ad.append(el("summary",null,"การแก้ไขเบื้องต้นที่ทำ (Assess & Correct)"+(p.actions.length?" · "+p.actions.length+" รายการ":"")));
+    const ap=el("div","actpills");
+    ACTS.forEach(([v,t])=>{const c=el("label","pill");const cb=el("input");cb.type="checkbox";cb.id="m-"+i+"-act-"+v;cb.checked=p.actions.includes(v);
+      cb.addEventListener("change",()=>{p.actions=cb.checked?[...new Set([...p.actions,v])]:p.actions.filter(x=>x!==v);ad.querySelector("summary").textContent="การแก้ไขเบื้องต้นที่ทำ (Assess & Correct)"+(p.actions.length?" · "+p.actions.length+" รายการ":"")});c.append(cb,el("span",null,t));ap.append(c)});
+    const oa=el("input");oa.type="text";oa.className="othertxt";oa.id="m-"+i+"-oact";oa.placeholder="อื่น ๆ (ระบุ)";oa.value=p.otherAct||"";oa.autocomplete="off";
+    oa.addEventListener("input",()=>{p.otherAct=oa.value});ap.append(oa);
+    if(p.otherAct)ad.open=true;
+    ad.append(ap);body.append(ad);
+    row.append(rail,body);box.append(row);
+  });
+  updateDeltas();
+}
+function updateDeltas(){
+  const b=base();let latest=null;
+  document.querySelectorAll("#monRows .pt").forEach(row=>{
+    const p=mon[Number(row.dataset.i)];if(!p)return;
+    const d=row.querySelector(".delta");d.textContent="";
+    if(b===p){d.textContent="ค่าตั้งต้น"}else if(b){const x=deltas(p);const a=el("b",null,fmtD(x.dvp)),t=el("b",null,fmtD(x.dtmp));d.append("ΔVP ",a,"  ΔTMP ",t)}
+    const badge=row.querySelector(".lvbadge"),ev=row.querySelector(".eval");ev.textContent="";
+    row.className="pt";
+    if(!alertsOn||!hasData(p)){badge.hidden=true;ev.hidden=true;return}
+    const r=evaluate(p);row.classList.add("l"+r.level);badge.hidden=false;badge.textContent=LV[r.level].n;ev.hidden=false;
+    ev.append(el("div","plan",LV[r.level].p));
+    if(r.triggers.length){ev.append(el("div","triglbl","สัญญาณเตือนที่พบ "+r.triggers.length+" ข้อ (ส่วนที่ 2)"));const tg=el("div","trig");r.triggers.forEach(t=>tg.append(el("span",null,t)));ev.append(tg)}
+    const pv=prevOf(p);
+    if(pv&&hasData(pv)){const pl=evaluate(pv).level;
+      if(pl>=1){const better=r.level<pl;const a=el("div","algo"+(better?"":" esc"));
+        if(better)a.append(el("b",null,"ดีขึ้น"),"  เฝ้าระวังต่อเนื่อง (MONITOR)");
+        else a.append(el("b",null,"ไม่ดีขึ้น / แย่ลง → Escalate"),"  รายงานแพทย์/ขอคำปรึกษา · พิจารณาเปลี่ยน dialyzer/bloodline · พิจารณาหยุดฟอกก่อนเวลาตามข้อบ่งชี้");
+        ev.append(a)}}
+    if(p.min!=null&&(!latest||p.min>=latest.p.min))latest={p,r};
+  });
+  const now=$("#nowCard");
+  if(alertsOn&&latest){now.hidden=false;now.className="now l"+latest.r.level;
+    $("#nowBig").textContent="ล่าสุด นาทีที่ "+latest.p.min+" · "+LV[latest.r.level].n;
+    const nx=latest.r.level===3?"คืนเลือดตาม protocol":latest.r.level>=1?"ประเมินซ้ำที่นาทีที่ "+(latest.p.min+10):"ประเมินครั้งถัดไปที่นาทีที่ "+(latest.p.min+30);
+    $("#nowSm").textContent=(latest.r.triggers.length?latest.r.triggers.length+" สัญญาณเตือน · ":"")+nx;
+  }else now.hidden=true;
+  drawTrend();progress();if(typeof sync==="function")try{const o=readForm();[["as-bfr",o.bfrMin],["as-vp",o.vpMax],["as-tmp",o.tmpMax],["as-dtmp",o.dtmpMax]].forEach(([id,v])=>{$("#"+id).textContent=v==null?"–":(id==="as-dtmp"&&v>0?"+":"")+v})}catch(e){}
+}
+function drawTrend(){
+  const pts=byMin().map(p=>({min:p.min,...deltas(p)}));
+  const wrap=$("#trendWrap"),svg=$("#trend");
+  if(pts.length<2||!pts.some(p=>p.dvp!=null||p.dtmp!=null)){wrap.hidden=true;return}
+  wrap.hidden=false;
+  const W=600,H=180,L=40,R=12,T=12,B=26;
+  const xs=pts.map(p=>p.min),x0=Math.min(...xs),x1=Math.max(...xs)||1;
+  const vals=[0];pts.forEach(p=>{if(p.dvp!=null)vals.push(p.dvp);if(p.dtmp!=null)vals.push(p.dtmp)});
+  let lo=Math.min(...vals),hi=Math.max(...vals);if(hi-lo<20){hi+=10;lo-=10}
+  const X=m=>L+(x1===x0?0:(m-x0)/(x1-x0))*(W-L-R),Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  const ns="http://www.w3.org/2000/svg";svg.textContent="";
+  const mk=(tag,attrs,style)=>{const e=document.createElementNS(ns,tag);for(const a in attrs)e.setAttribute(a,attrs[a]);if(style)e.setAttribute("style",style);svg.append(e);return e};
+  if(alertsOn)[[40,"var(--y)"],[80,"var(--o)"],[120,"var(--r)"]].forEach(([v,c])=>{if(v<=hi&&v>=lo){mk("line",{x1:L,x2:W-R,y1:Y(v),y2:Y(v)},"stroke:"+c+";stroke-width:1.2;stroke-dasharray:5 5");const t=mk("text",{x:W-R,y:Y(v)-4,"text-anchor":"end","font-size":10.5},"fill:"+c+";font-family:var(--f-mono)");t.textContent="ΔTMP "+v}});
+  mk("line",{x1:L,x2:W-R,y1:Y(0),y2:Y(0)},"stroke:var(--line);stroke-width:1.2");
+  [hi,0,lo].forEach(v=>{const t=mk("text",{x:L-6,y:Y(v)+4,"text-anchor":"end","font-size":11},"fill:var(--muted);font-family:var(--f-mono)");t.textContent=Math.round(v)});
+  pts.forEach(p=>{const t=mk("text",{x:X(p.min),y:H-8,"text-anchor":"middle","font-size":11},"fill:var(--muted);font-family:var(--f-mono)");t.textContent=p.min+"′"});
+  [["dvp","var(--primary)"],["dtmp","var(--o)"]].forEach(([k,c])=>{
+    const q=pts.filter(p=>p[k]!=null);if(!q.length)return;
+    mk("polyline",{points:q.map(p=>X(p.min).toFixed(1)+","+Y(p[k]).toFixed(1)).join(" "),fill:"none"},"stroke:"+c+";stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round");
+    q.forEach(p=>mk("circle",{cx:X(p.min),cy:Y(p[k]),r:4.5},"fill:var(--surface);stroke:"+c+";stroke-width:2.5"));
+  });
+}
+$("#startNow").addEventListener("click",()=>{const d=new Date();form.elements.startTime.value=z2(d.getHours())+":"+z2(d.getMinutes());form.elements.startTime.dispatchEvent(new Event("input",{bubbles:true}));sync()});
+$("#addPoint").addEventListener("click",()=>{
+  if(!form.elements.startTime.value){const c=$("#startCard");c.classList.add("need");$("#startHint").textContent="⚠️ ลงเวลาเริ่ม HD ก่อน แล้วค่อยเพิ่มจุดเวลา";c.scrollIntoView({block:"center",behavior:"smooth"});form.elements.startTime.focus();return}
+  const d=new Date();const at=z2(d.getHours())+":"+z2(d.getMinutes());
+mon.push({at,min:minFrom(at),bfr:null,ap:null,vp:null,tmp:null,alarm:0,pump:0,acBad:0,clot:0,actions:[]});
+  renderMon();
+  const f=document.getElementById("m-"+(mon.length-1)+(form.elements.startTime.value?"-bfr":"-at"));if(f)f.focus();
+});
+form.elements.bfrSet.addEventListener("input",updateDeltas);
+form.elements.startTime.addEventListener("input",()=>{if(form.elements.startTime.value){$("#startCard").classList.remove("need");$("#startHint").textContent="แอพคำนวณว่า HD มาแล้วกี่ ชม. กี่นาที ให้ทุกจุดเวลา แก้ตามหน้าจอเครื่องได้"}mon.forEach(p=>{if(p.at&&!p.minManual)p.min=minFrom(p.at)});renderMon()});
+function clearMon(){mon=[];renderMon()}
+let me=null;try{me=localStorage.getItem("hdcw-me")||null}catch(e){}
+(function(){
+  const sel=$("#meSel"),inp=$("#meInput"),OTHER="__other__";
+  NURSES.forEach(n=>sel.append(new Option(n,n)));sel.append(new Option("อื่น ๆ (พิมพ์ชื่อเอง)",OTHER));
+  const store=v=>{me=v||null;try{me?localStorage.setItem("hdcw-me",me):localStorage.removeItem("hdcw-me")}catch(e){}sel.parentElement.classList.toggle("need",!me)};
+  if(me&&NURSES.includes(me))sel.value=me;else if(me){sel.value=OTHER;inp.hidden=false;inp.value=me}
+  store(me);
+  sel.addEventListener("change",()=>{if(sel.value===OTHER){inp.hidden=false;inp.focus();store(inp.value.trim())}else{inp.hidden=true;inp.value="";store(sel.value)}});
+  inp.addEventListener("input",()=>store(inp.value.trim()));
+})();
+// ---------- API (Google Apps Script) ----------
+let unitKey="";try{unitKey=localStorage.getItem("hdcw-key")||""}catch(e){}
+async function api(action,data){
+  const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,key:unitKey,...(data||{})})});
+  const j=await res.json();
+  if(!j.ok){const e=new Error(j.error||"error");e.code=j.error;throw e}
+  return j;
+}
+const col={doc(id){id=id||("s"+Date.now().toString(36)+Math.random().toString(36).slice(2,7));return {id,
+  set:async d=>{const j=await api("save",{record:{...d,id}});mergeRecord(j.record);return j},
+  delete:async()=>{await api("delete",{id,by:me});records=records.filter(r=>r.id!==id);renderAll()}}}};
+function mergeRecord(r){if(!r)return;const i=records.findIndex(x=>x.id===r.id);if(i>=0)records[i]=r;else records.unshift(r);renderAll()}
+
+function today(){const d=new Date();const z=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate())}
+function isDone(r){return r.status!=="ongoing"}
+function isClot(r){return isDone(r)&&(Number(r.grade)>=2||r.changed==="1"||r.noReturn==="1"||r.changeLine==="1")}
+function hasOutcome(o){return o.grade!=null&&o.changed!=null&&o.noReturn!=null}
+
+function readForm(){
+  const fd=new FormData(form);const o={};
+  TEXTS.forEach(k=>{o[k]=(fd.get(k)||"").toString().trim()});
+  NUMS.forEach(k=>{const v=(fd.get(k)||"").toString().trim();o[k]=v===""?null:Number(v)});
+  CHOICES.forEach(k=>{o[k]=fd.get(k)??null});
+  if(o.anticoag!=="heparin")o.heparinU=null;
+  if(o.locType==="portable")o.bed=null;else{o.slot=null;o.pward=""}
+  if(o.earlyStop!=="1"){o.earlyReason="";o.earlyReasonCode=null}
+  o.actualManual=actManual?1:0;
+  if(o.changed!=="1"&&o.changeLine!=="1")o.changeReason="";
+  o.monitor=mon.filter(hasData).map(p=>{const r=evaluate(p);const d=deltas(p);return {min:p.min,at:p.at||null,minManual:p.minManual?1:0,bfr:p.bfr,vp:p.vp,tmp:p.tmp,dvp:d.dvp,dtmp:d.dtmp,alarm:p.alarm?1:0,pump:p.pump?1:0,acBad:p.acBad?1:0,clot:Number(p.clot)||0,actions:Array.isArray(p.actions)?p.actions:[],otherTrig:(p.otherTrig||"").trim()||null,otherAct:(p.otherAct||"").trim()||null,level:r.level,triggers:r.triggers}});
+  o.maxLevel=o.monitor.reduce((m,p)=>Math.max(m,p.level),0);
+  // ค่าสรุปคำนวณจากจุดเวลาเสมอ (ไม่ให้กรอกซ้ำ)
+  const nn=a=>a.filter(v=>v!=null&&!isNaN(v));
+  const b=nn(o.monitor.map(p=>p.bfr)),v=nn(o.monitor.map(p=>p.vp)),t=nn(o.monitor.map(p=>p.tmp)),dt=nn(o.monitor.map(p=>p.dtmp));
+  o.bfrMin=b.length?Math.min(...b):null;o.vpMax=v.length?Math.max(...v):null;o.tmpMax=t.length?Math.max(...t):null;o.dtmpMax=dt.length?Math.max(...dt):null;
+  return o;
+}
+function fillForm(o){
+  form.reset();actManual=!!Number(o.actualManual);earlyAutoVal=null;
+  mon=(Array.isArray(o.monitor)?o.monitor:[]).map(p=>({...p}));
+  TEXTS.forEach(k=>{form.elements[k].value=o[k]??""});
+  NUMS.forEach(k=>{form.elements[k].value=o[k]==null?"":o[k]});
+  CHOICES.forEach(k=>{const v=o[k];if(v==null)return;const e=form.querySelector(`input[name="${k}"][value="${CSS.escape(String(v))}"]`);if(e)e.checked=true});
+  renderMon();fillAct();dxLastHidden=null;dxFromHidden();sync();
+}
+// ---------- ผู้ป่วย: รหัสวิจัย + อักษรย่อ, ออกรหัสใหม่, ดึงประวัติ clot ----------
+const CODE_PREFIX="CC-";
+let pendingPts=[];      // ผู้ป่วยใหม่ที่ออกรหัสแล้วแต่ยังไม่บันทึก (โหมดไม่มีเซิร์ฟเวอร์)
+let serverPts=[];       // ทะเบียนรหัสจากชีต patients (รวมรหัสที่จองแล้วแต่ยังไม่มีการฟอก)
+let prevAutoVal=null;   // ค่าข้อ 7 ที่แอพเติมให้ล่าสุด (null = ผู้ใช้เลือกเอง)
+const normInit=t=>String(t||"").replace(/[\s.]/g,"").toLowerCase();
+const sessKey=r=>String(r.date||"")+" "+String(r.startTime||"")+" "+String(r.createdAt||"");
+const thDate=d=>{if(!d)return "";const t=new Date(d+"T00:00:00");return isNaN(t)?d:t.toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"2-digit"})};
+function patients(){
+  const m=new Map();
+  records.forEach(r=>{if(!r.pid)return;const p=m.get(r.pid)||{pid:r.pid,recs:[]};p.recs.push(r);m.set(r.pid,p)});
+  const out=[...m.values()];
+  out.forEach(p=>{p.recs.sort((a,b)=>sessKey(b).localeCompare(sessKey(a)));p.pinit=(p.recs.find(r=>r.pinit)||{}).pinit||"";p.last=p.recs[0]});
+  return out.sort((a,b)=>sessKey(b.last).localeCompare(sessKey(a.last)));
+}
+function nextCode(){
+  let max=0;
+  records.map(r=>r.pid).concat(pendingPts.map(p=>p.pid),serverPts.map(p=>p.pid)).forEach(c=>{const m=/^CC-(\d+)$/i.exec(String(c||"").trim());if(m)max=Math.max(max,+m[1])});
+  return CODE_PREFIX+String(max+1).padStart(3,"0");
+}
+function renderPidOptions(){
+  const sel=$("#f-pidSel");if(!sel)return;
+  const cur=form.elements.pid.value;
+  pendingPts=pendingPts.filter(p=>!records.some(r=>r.pid===p.pid));
+  const list=patients();
+  pendingPts.forEach(p=>list.unshift({pid:p.pid,pinit:p.pinit,recs:[],last:null}));
+  serverPts.filter(p=>!list.some(x=>x.pid===p.pid)).reverse().forEach(p=>list.unshift({pid:p.pid,pinit:p.pinit,recs:[],last:null}));
+  list.forEach(x=>{if(!x.pinit){const sp=serverPts.find(p=>p.pid===x.pid);if(sp)x.pinit=sp.pinit}});
+  if(cur&&!list.some(x=>x.pid===cur))list.unshift({pid:cur,pinit:form.elements.pinit.value,recs:[],last:null});
+  sel.textContent="";sel.append(new Option("— เลือกผู้ป่วย —",""));
+  list.forEach(p=>sel.append(new Option(p.pid+(p.pinit?" · "+p.pinit:"")+(p.last?"":" (ใหม่)"),p.pid)));
+  sel.value=cur||"";
+}
+function priorOf(pid,o){
+  const cur=editingId?records.find(r=>r.id===editingId):null;
+  return records.filter(r=>r.pid===pid&&r.id!==editingId&&isDone(r)&&(
+      !o.date||String(r.date)<o.date||(String(r.date)===o.date&&(!cur||String(r.createdAt||"")<String(cur.createdAt||"")))))
+    .sort((a,b)=>sessKey(b).localeCompare(sessKey(a)));
+}
+function setChoice(name,val){
+  form.querySelectorAll(`input[name="${name}"]`).forEach(i=>{i.checked=false});
+  if(val==null)return;const e=form.querySelector(`input[name="${name}"][value="${CSS.escape(String(val))}"]`);if(e)e.checked=true;
+}
+function autoPrev(){
+  const pid=form.elements.pid.value;if(!pid)return;
+  const o={date:form.elements.date.value};
+  const prior=priorOf(pid,o);
+  const v=prior.length?(Number(prior[0].grade)>=2?"1":"0"):"first";
+  setChoice("prevClot",v);prevAutoVal=v;
+}
+function ptUI(){
+  const pid=form.elements.pid.value,pinit=form.elements.pinit.value;
+  $("#pidShow").hidden=!pid;$("#hnRow").hidden=!!pid;$("#pidCode").textContent=pid+(pinit?" · "+pinit:"");
+  if(!pid)$("#pidNote").textContent="";
+  const pc=form.querySelector('input[name="prevClot"]:checked');
+  $("#prevAuto").hidden=!(prevAutoVal!=null&&pc&&pc.value===prevAutoVal);
+  const h=$("#ptHist");
+  if(!pid){h.hidden=true;return}
+  h.hidden=false;h.textContent="";h.className="hist";
+  const prior=priorOf(pid,{date:form.elements.date.value});
+  const allDone=records.filter(r=>r.pid===pid&&isDone(r));
+  const nClot=allDone.filter(isClot).length;
+  h.append(el("div","ht",pid+(pinit?" · "+pinit:"")+(allDone.length?" — ฟอก "+allDone.length+" ครั้ง · อุดตัน "+nClot+" ครั้ง":" — ผู้ป่วยใหม่ ยังไม่มีประวัติในระบบ")));
+  if(prior.length){
+    const r=prior[0];const g=Number(r.grade);
+    if(g>=2)h.classList.add("clot");
+    const bits=["ครั้งก่อน "+thDate(r.date),r.locType==="portable"?"Portable":(r.bed?"เตียง "+r.bed:null),"Grade "+r.grade,
+      r.changed==="1"?"เปลี่ยน dialyzer":null,r.changeLine==="1"?"เปลี่ยน bloodline":null,r.noReturn==="1"?"circuit loss":null,
+      LABEL.anticoag[r.anticoag]||null].filter(Boolean);
+    h.append(el("div","hl",bits.join(" · ")));
+    const ch=el("div","hchips");
+    prior.slice(0,8).reverse().forEach(x=>{const c=el("span","hc g"+(Number(x.grade)||0),"G"+(x.grade??"–"));c.title=thDate(x.date);ch.append(c)});
+    h.append(ch);
+  }
+  const live=records.find(r=>r.pid===pid&&!isDone(r)&&r.id!==editingId);
+  if(live)h.append(el("div","hw","มีรายการกำลังฟอกของผู้ป่วยรายนี้อยู่แล้ว ("+(live.locType==="portable"?"Portable "+(live.slot||""):"เตียง "+live.bed)+") เปิดจากบอร์ดเพื่อบันทึกต่อแทน"));
+}
+function onPick(e){
+  e.stopPropagation();
+  const pid=e.target.value;
+  if(pid===form.elements.pid.value)return;
+  const p0=patients().find(x=>x.pid===pid);const sp=serverPts.find(x=>x.pid===pid);
+  const p=p0?{...p0,pinit:p0.pinit||(sp&&sp.pinit)||""}:(pendingPts.find(x=>x.pid===pid)||sp);
+  form.elements.pid.value=pid;form.elements.pinit.value=p?p.pinit||"":"";
+  if(pid&&!editingId){
+    autoPrev();
+    const last=p&&p.last;
+    if(last){
+      if(form.elements.age.value===""&&last.age!=null)form.elements.age.value=last.age;
+      if(!form.querySelector('input[name="renalDx"]:checked')&&last.renalDx)setChoice("renalDx",last.renalDx);
+      if(!form.elements.dxText.value&&last.dxText){form.elements.dxText.value=last.dxText;dxFromHidden()}
+      if(!form.querySelector('input[name="sex"]:checked')&&last.sex)setChoice("sex",last.sex);
+    }
+  }
+  sync();
+}
+form.addEventListener("change",e=>{
+  if(e.target.name==="prevClot"){if(e.target.value!==prevAutoVal)prevAutoVal=null;ptUI()}
+  if(e.target.name==="date"&&prevAutoVal!=null&&!editingId){autoPrev();sync()}
+});
+// --- HN → รหัสวิจัย (เซิร์ฟเวอร์จับคู่ HN เดิม หรือออกเลขรันใหม่) ---
+let demoMap={}; // โหมดตัวอย่าง (ยังไม่ตั้ง API_URL) เก็บในหน่วยความจำเท่านั้น
+async function convertHN(){
+  const inp=$("#f-hn"),msg=$("#hnMsg"),btn=$("#hnBtn");
+  const hn=inp.value.trim().toUpperCase().replace(/[^0-9A-Z]/g,"").replace(/^0+(?=.)/,"");
+  if(hn.length<4){setMsg(msg,"พิมพ์ HN ให้ครบก่อน",false);inp.focus();return}
+  btn.disabled=true;setMsg(msg,"กำลังแปลงรหัส…",true);
+  let pid,isNew;
+  try{
+    if(API_URL.startsWith("PASTE")){if(!demoMap[hn])demoMap[hn]=nextCode();pid=demoMap[hn];isNew=!records.some(r=>r.pid===pid)&&!pendingPts.some(p=>p.pid===pid);if(isNew)pendingPts.push({pid,pinit:""})}
+    else{const j=await api("hnLookup",{hn,date:form.elements.date.value,by:me});pid=j.pid;isNew=j.isNew;if(!serverPts.some(p=>p.pid===pid))serverPts.push({pid,pinit:""});
+      // ผู้ป่วยเดิม: ดึงประวัติล่าสุดจากชีต (อาจมีเครื่องอื่นเพิ่งบันทึก)
+      if(!isNew){try{const L=await api("list");records=L.records;records.sort((x,y)=>String(y.createdAt||"").localeCompare(String(x.createdAt||"")));if(Array.isArray(L.patients))serverPts=L.patients;renderAll()}catch(e2){}}}
+  }catch(ex){setMsg(msg,ex&&ex.code==="bad_hn"?"HN ไม่ถูกต้อง":ex&&ex.code==="bad_key"?"รหัสหน่วยไม่ถูกต้อง":"แปลงรหัสไม่สำเร็จ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง",false);btn.disabled=false;return}
+  inp.value="";btn.disabled=false;msg.textContent="";inp.blur(); // ไม่เก็บ HN ไว้บนจอ
+  onPick({stopPropagation(){},target:{value:pid}});
+  const n=records.filter(r=>r.pid===pid&&isDone(r)).length;
+  $("#pidNote").textContent=isNew?"🌱 ผู้ป่วยใหม่ · ออกรหัสให้อัตโนมัติ":(n?"📂 เคยฟอก "+n+" ครั้ง":"📂 มีรหัสอยู่แล้ว");
+}
+$("#hnBtn").addEventListener("click",convertHN);
+$("#f-hn").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();convertHN()}});
+$("#pidChange").addEventListener("click",()=>{form.elements.pid.value="";form.elements.pinit.value="";prevAutoVal=null;sync();$("#f-hn").focus()});
+
+// ---------- Dx: รายการจากทะเบียนหน่วย คัดซ้ำ แก้ตัวสะกด และจัดกลุ่ม ----------
+const DX_GROUPS=[
+ ["infect","🦠 ติดเชื้อ / Sepsis",["Sepsis","Septic shock","Pneumonia (HAP/VAP/CAP)","UTI/Pyelonephritis","Leptospirosis","Melioidosis","TB","Covid-19","Influenza A","Influenza B","HBV/HCV infection","Cholangitis/Cholecystitis","Peritonitis","Infected wound/Cellulitis/NF","Infective endocarditis (IE)","Spinal infection","Necrotizing otitis externa","Herpes zoster","Tetanus","PUI"]],
+ ["access","💉 Vascular access / สาย",["CRBSI","R/O CRBSI","DLC/Perm cath malfunction","DLC bleeding","AVF stenosis","AVF malfunction","AVF infection","AVG stenosis","AVG malfunction","AVG infection","AVF/AVG thrombosis","AVF/AVG aneurysm/rupture/bleeding","Vascular access complication","นัดทำเส้น AVF/AVG/PC"]],
+ ["pd","🫗 CAPD / PD",["Infected CAPD (PD peritonitis)","CAPD fail","Complication CAPD","TK malfunction","Hernia/Leak (CAPD)"]],
+ ["cardio","❤️ หัวใจและหลอดเลือด",["CHF","Cardiogenic shock","STEMI/NSTEMI/ACS","TVD/MVD","AF","Arrhythmia","Heart block","Severe AS","Severe AR","Severe MR","Severe MS","Severe TR","Pericardial effusion","Pulmonary HT (PHT)","PE","DVT","Arterial occlusion/Limb ischemia/Steal syndrome","AAA","Aortic dissection","Plan/Post CAG/CABG","Plan/Post CTA","Post cardiac arrest","HT"]],
+ ["neuro","🧠 สมอง / ระบบประสาท",["Acute ischemic stroke (AIS)","MCA infarction","SAH","SDH","IVH","Brain hemorrhage","AOC (Alteration of consciousness)","Hepatic encephalopathy"]],
+ ["resp","🫁 ระบบหายใจ",["ARDS","Pleural effusion","Asthma/COPD","Tracheal/Subglottic stenosis"]],
+ ["meta","⚗️ ข้อบ่งชี้ฟอก / เมตาบอลิก",["Volume overload","Hyperkalemia","Metabolic acidosis","Hypercalcemia","Electrolyte imbalance","Uremia/Uremic symptoms","DM"]],
+ ["renal","🫘 ไต / ทางเดินปัสสาวะ",["AKI on top CKD","ATN","RPGN","Nephrotic syndrome (NS)","SLE/Lupus nephritis","Rhabdomyolysis","S/P kidney biopsy","S/P nephrectomy","Pre KT","Post KT","BPH/Renal stone/Adrenal mass","Post CRRT"]],
+ ["heme","🩸 เลือด / มะเร็ง",["Anemia","Bleeding","MM/Pancytopenia","NHL","CA (มะเร็ง)","Parathyroidectomy/CA tonsil"]],
+ ["gi","🍽️ ทางเดินอาหาร / ตับ",["UGIB","Cirrhosis","Alcoholic liver disease","Pancreatitis","PU perforation","Gut/Bowel obstruction","Abdominal pain/Dyspepsia/Diarrhea"]],
+ ["tox","💊 ยา / พิษ",["Drug overdose/Drug toxicity","Anaphylaxis/Drug allergy","Suicide attempt"]],
+ ["other","🩹 ผ่าตัด / อื่น ๆ",["Post-op","Ortho","Spondylolisthesis","ENT","Eye","Eclampsia","MARA"]]];
+// รายการที่พบบ่อยในหน่วย (ผู้ป่วยวิกฤต) แสดงไว้ให้แตะได้ทันที
+const DX_QUICK=["Sepsis","Septic shock","Pneumonia (HAP/VAP/CAP)","UTI/Pyelonephritis","CRBSI","DLC/Perm cath malfunction","Volume overload","Hyperkalemia","Metabolic acidosis","Uremia/Uremic symptoms","AKI on top CKD","CHF","Cardiogenic shock","Post cardiac arrest","Bleeding","DM","HT"];
+const DX_ALL=[];DX_GROUPS.forEach(([g,,items])=>items.forEach(t=>DX_ALL.push({g,t})));
+let dxPicked=new Set(),dxLastHidden=null;
+function dxSet(t,on){on?dxPicked.add(t):dxPicked.delete(t);dxToHidden()}
+function dxToHidden(){
+  const other=$("#dxOther").value.trim();
+  const list=DX_ALL.filter(x=>dxPicked.has(x.t)).map(x=>x.t);other.split(/\s*,\s*/).filter(Boolean).forEach(t=>list.push("อื่น ๆ: "+t));
+  form.elements.dxText.value=list.join("; ");
+  form.elements.dxGroups.value=[...new Set(DX_ALL.filter(x=>dxPicked.has(x.t)).map(x=>x.g).concat(other?["other"]:[]))].join(";");
+  dxLastHidden=form.elements.dxText.value;dxRenderSel();
+}
+function dxFromHidden(){
+  const v=form.elements.dxText.value||"";if(v===dxLastHidden)return;dxLastHidden=v;
+  dxPicked=new Set();const others=[];
+  v.split(/;\s*/).map(x=>x.trim()).filter(Boolean).forEach(t=>{
+    const o=/^อื่น ๆ:\s*/.test(t)?null:DX_ALL.find(x=>x.t.toLowerCase()===t.toLowerCase());
+    if(o)dxPicked.add(o.t);else others.push(t.replace(/^อื่น ๆ:\s*/,""))});
+  $("#dxOther").value=others.join(", ");
+  form.elements.dxGroups.value=[...new Set(DX_ALL.filter(x=>dxPicked.has(x.t)).map(x=>x.g).concat(others.length?["other"]:[]))].join(";");
+  dxRenderSel();
+}
+function dxRenderSel(){
+  const box=$("#dxSel");box.textContent="";const other=$("#dxOther").value.trim();
+  const items=DX_ALL.filter(x=>dxPicked.has(x.t));
+  if(!items.length&&!other){box.hidden=true}else box.hidden=false;
+  items.forEach(x=>{const c=el("button","dxchip",x.t+" ✕");c.type="button";c.title="เอาออก";
+    c.addEventListener("click",()=>dxSet(x.t,false));box.append(c)});
+  const olist=other?other.split(/\s*,\s*/).filter(Boolean):[];
+  olist.forEach(t=>{const c=el("button","dxchip o",t+" ✕");c.type="button";c.title="เอาออก";c.addEventListener("click",()=>window.dxRemoveOther(t));box.append(c)});
+  const n=items.length+olist.length;$("#dxCount").textContent=n?"เลือกแล้ว "+n:"";
+}
+(function(){
+  const inp=$("#dxSearch"),sug=$("#dxSug");let hits=[],act=0;
+  const norm=t=>t.toLowerCase().replace(/[\s/().\-]+/g," ");
+  const GL=Object.fromEntries(DX_GROUPS.map(([g,l])=>[g,l]));
+  function others(){return $("#dxOther").value.split(/\s*,\s*/).filter(Boolean)}
+  function setOthers(a){$("#dxOther").value=a.join(", ");dxToHidden()}
+  function close(){sug.hidden=true;inp.setAttribute("aria-expanded","false")}
+  function pick(i){const h=hits[i];if(!h)return;
+    if(h.custom){const o=others();if(!o.includes(h.t))o.push(h.t);setOthers(o)}else dxSet(h.t,true);
+    inp.value="";close();inp.focus()}
+  function show(){
+    const q=norm(inp.value.trim());sug.textContent="";hits=[];act=0;
+    if(!q){close();return}
+    const words=q.split(" ").filter(Boolean);
+    const scored=DX_ALL.filter(x=>!dxPicked.has(x.t)).map(x=>{const n=norm(x.t);if(!words.every(w=>n.includes(w)))return null;
+      return {...x,s:(n.startsWith(q)?0:n.split(" ").some(w=>w.startsWith(words[0]))?1:2)}}).filter(Boolean)
+      .sort((a,b)=>a.s-b.s||a.t.length-b.t.length).slice(0,8);
+    hits=scored;
+    const raw=inp.value.trim();
+    if(!hits.length&&raw.length>=2&&!DX_ALL.some(x=>x.t.toLowerCase()===raw.toLowerCase()))hits.push({t:raw,custom:true});
+    hits.forEach((h,i)=>{const b=el("button","dxopt"+(i===0?" act":""));b.type="button";b.setAttribute("role","option");
+      if(h.custom){b.append(el("span","dxt","➕ เพิ่ม “"+h.t+"”"),el("span","dxg2","อื่น ๆ (ไม่มีในรายการ)"))}
+      else{b.append(el("span","dxt",h.t),el("span","dxg2",GL[h.g]))}
+      b.addEventListener("mousedown",e=>e.preventDefault());b.addEventListener("click",()=>pick(i));sug.append(b)});
+    if(!hits.length)sug.append(el("div","dxnone","ไม่พบ ลองพิมพ์คำอื่น"));
+    sug.hidden=false;inp.setAttribute("aria-expanded","true");
+  }
+  function mark(){sug.querySelectorAll(".dxopt").forEach((b,i)=>b.classList.toggle("act",i===act))}
+  inp.addEventListener("input",e=>{e.stopPropagation();show()});
+  inp.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){e.preventDefault();pick(act)}
+    else if(e.key==="ArrowDown"&&hits.length){e.preventDefault();act=(act+1)%hits.length;mark()}
+    else if(e.key==="ArrowUp"&&hits.length){e.preventDefault();act=(act-1+hits.length)%hits.length;mark()}
+    else if(e.key==="Escape"){close()}});
+  inp.addEventListener("blur",()=>setTimeout(close,150));
+  inp.addEventListener("focus",show);
+  window.dxRemoveOther=t=>setOthers(others().filter(x=>x!==t));
+  dxRenderSel();
+})();
+
+function risk(o){
+  const r=[];
+  if(o.ett==="1")r.push("ใส่ ETT");
+  if(o.prevClot==="1")r.push("เคยอุดตันครั้งก่อน");
+  if(o.anticoag==="free")r.push("Heparin-free");
+  if(o.access==="catheter")r.push("ใช้ catheter");
+  if(o.hct!=null&&o.hct>=35)r.push("Hct ≥ 35%");
+  if(o.transfusion&&o.transfusion!=="none")r.push("ให้เลือดผ่านวงจร");
+  return r;
+}
+function progress(){
+  const o=readForm();
+  $("#st-screen").classList.toggle("done",!!(o.date&&o.pid&&o.access&&o.anticoag));
+  $("#st-monitor").classList.toggle("done",o.monitor.length>0);
+  $("#st-eval").classList.toggle("done",hasOutcome(o));
+}
+function sync(){
+  const o=readForm();
+  $("#heparinWrap").hidden=o.anticoag!=="heparin";
+  $("#bedWrap").hidden=o.locType==="portable";$("#slotWrap").hidden=o.locType!=="portable";$("#pwardWrap").hidden=o.locType!=="portable";
+  $("#reasonWrap").hidden=o.earlyStop!=="1";
+  actUI(o);
+  [["as-bfr",o.bfrMin],["as-vp",o.vpMax],["as-tmp",o.tmpMax],["as-dtmp",o.dtmpMax]].forEach(([id,v])=>{$("#"+id).textContent=v==null?"–":(id==="as-dtmp"&&v>0?"+":"")+v});
+  dxFromHidden();
+  $("#changeReasonWrap").hidden=!(o.changed==="1"||o.changeLine==="1");
+  const rk=risk(o);const rb=$("#riskBox");rb.hidden=!rk.length;const rc=$("#riskChips");rc.textContent="";rk.forEach(t=>rc.append(el("span","rchip",t)));
+  const box=$("#outcomeBox");
+  if(o.grade==null&&o.changed==null&&o.noReturn==null){box.hidden=true}else{
+    box.hidden=false;const c=isClot({...o,status:"complete"});box.className="outcome "+(c?"yes":"no");
+    box.textContent=(c?"ครั้งนี้นับเป็น “เกิดการอุดตัน”":"ครั้งนี้นับเป็น “ไม่เกิดการอุดตัน”")+(hasOutcome(o)?"":" (ยังกรอกไม่ครบ)");}
+  ptUI();
+  progress();
+}
+form.addEventListener("input",sync);form.addEventListener("change",sync);
+document.querySelectorAll(".step").forEach(b=>b.addEventListener("click",()=>{const t=document.getElementById(b.dataset.go);if(t)t.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}));
+
+// ---------- เวลาฟอกจริง: เวลาเลิก − เวลาเริ่ม (หรือกรอกจากหน้าจอเครื่อง) และเทียบกับเวลาที่สั่ง ----------
+let actManual=false,earlyAutoVal=null;
+function actFromEnd(){const s0=hm2m(form.elements.startTime.value),e=hm2m(form.elements.endTime.value);if(s0==null||e==null)return null;let d=e-s0;if(d<0)d+=1440;return d}
+function fillAct(){const v=form.elements.actualMin.value;$("#f-acth").value=v===""?"":Math.floor(+v/60);$("#f-actm").value=v===""?"":(+v)%60}
+function recalcAct(){if(actManual)return;const d=actFromEnd();form.elements.actualMin.value=d==null?"":d;fillAct()}
+function actUI(o){
+  const a=o.actualMin,rx=o.rxHours,src=$("#actSrc"),cmp=$("#actCmp");
+  src.textContent=a==null?"ลงเวลาเลิก แอพคำนวณเวลาฟอกจริงให้ หรือกรอก ชม./นาที จากหน้าจอเครื่อง":(actManual?"✍️ กรอกจากหน้าจอเครื่อง":"⏱️ คำนวณจากเวลาเริ่ม "+(o.startTime||"–")+" ถึงเวลาเลิก "+(o.endTime||"–")+" (แก้ได้)");
+  if(a!=null&&rx){const short=Math.round(rx*60)-a;cmp.hidden=false;
+    cmp.className="cmp "+(short>15?"short":"ok");
+    cmp.textContent="สั่ง "+fmtHM(Math.round(rx*60))+" · ฟอกจริง "+fmtHM(a)+(short>15?" → ขาด "+fmtHM(short):short>0?" → ใกล้เคียงตามสั่ง":" → ครบตามสั่ง");
+    const v=short>15?"1":"0";const cur=form.querySelector('input[name="earlyStop"]:checked');
+    if(!cur||(earlyAutoVal!=null&&cur.value===earlyAutoVal&&cur.value!==v)){setChoice("earlyStop",v);earlyAutoVal=v;$("#reasonWrap").hidden=v!=="1"}
+  }else if(a!=null){cmp.hidden=false;cmp.className="cmp";cmp.textContent="ฟอกจริง "+fmtHM(a)+" · ใส่เวลาฟอกที่สั่ง (ข้อ 13) เพื่อให้แอพเทียบให้"}
+  else cmp.hidden=true;
+  const ce=form.querySelector('input[name="earlyStop"]:checked');$("#earlyAuto").hidden=!(earlyAutoVal!=null&&ce&&ce.value===earlyAutoVal);
+}
+function fmtHM(m){const h=Math.floor(m/60),r=m%60;return (h?h+" ชม.":"")+(h&&r?" ":"")+(r||!h?r+" นาที":"")}
+form.elements.endTime.addEventListener("input",()=>{recalcAct();sync()});
+$("#endNow").addEventListener("click",()=>{const d=new Date();form.elements.endTime.value=z2(d.getHours())+":"+z2(d.getMinutes());recalcAct();sync()});
+const onAct=()=>{const h=$("#f-acth").value,m=$("#f-actm").value;
+  if(h===""&&m===""){actManual=false;recalcAct()}else{actManual=true;form.elements.actualMin.value=(+h||0)*60+(+m||0)}sync()};
+$("#f-acth").addEventListener("input",onAct);$("#f-actm").addEventListener("input",onAct);
+form.addEventListener("change",e=>{if(e.target.name==="earlyStop"&&e.target.value!==earlyAutoVal)earlyAutoVal=null});
+form.elements.startTime.addEventListener("input",()=>{recalcAct();autoShift();sync()});
+let shiftAutoVal=null;
+function autoShift(){const st=hm2m(form.elements.startTime.value);const cur=form.querySelector('input[name="shift"]:checked');
+  if(st!=null&&st>=930){if(!cur||cur.value===shiftAutoVal||!shiftAutoVal&&!cur){setChoice("shift","r3");shiftAutoVal="r3"}}
+  else if(cur&&shiftAutoVal==="r3"&&cur.value==="r3"){setChoice("shift",null);shiftAutoVal=null}
+  const c2=form.querySelector('input[name="shift"]:checked');$("#shiftAuto").hidden=!(shiftAutoVal&&c2&&c2.value===shiftAutoVal)}
+form.addEventListener("change",e=>{if(e.target.name==="shift"){if(e.target.value!==shiftAutoVal)shiftAutoVal=null;$("#shiftAuto").hidden=true}});
+function setMsg(e,t,ok){e.textContent=t;e.className="msg "+(ok?"ok":"bad")}
+function validate(o){
+  const miss=[];
+  if(!o.date)miss.push("วันที่");
+  if(!o.locType)miss.push("ที่ฟอก");
+  if(o.locType==="unit"&&o.bed==null)miss.push("เตียง");
+  if(o.locType==="portable"&&!o.slot)miss.push("ลำดับ Portable");
+  if(!o.pid)miss.push("HN → รหัสวิจัย (กดแปลงรหัส)");
+  if(!o.renalDx)miss.push("Dx ภาวะไต (AKI/ESRD)");
+  if(o.grade!=null||o.changed!=null||o.noReturn!=null){
+    if(o.grade==null)miss.push("Clot Grade");
+    if(o.noReturn==null)miss.push("Circuit loss");
+    if(o.changed==null)miss.push("เปลี่ยน dialyzer");
+  }
+  const pts=mon.filter(hasData);
+  if(pts.length&&!o.startTime)miss.push("เวลาเริ่ม HD");
+  if(o.earlyStop==="1"&&!o.earlyReasonCode)miss.push("สาเหตุที่ฟอกไม่ครบเวลา");
+  if(o.earlyReasonCode==="other"&&!o.earlyReason)miss.push("รายละเอียดสาเหตุ (อื่น ๆ)");
+  if(miss.length)return "กรอกให้ครบ: "+miss.join(", ");
+  if(pts.some(p=>p.min==null))return "ใส่เวลาที่ HD มาแล้วให้ครบทุกจุดเวลา";
+  if(pts.some(p=>p.min>720))return "มีจุดเวลาห่างจากเวลาเริ่ม HD เกิน 12 ชม. ตรวจสอบเวลาอีกครั้ง";
+  if(o.pinit){const owner=records.find(r=>r.pid===o.pid&&r.id!==editingId&&r.pinit&&normInit(r.pinit)!==normInit(o.pinit));
+    if(owner)return "รหัส "+o.pid+" เป็นของผู้ป่วย "+owner.pinit+" แล้ว กด “ผู้ป่วยใหม่” อีกครั้งเพื่อรับรหัสใหม่";}
+  if(/^\d{6,}$/.test(o.pid))return "รหัสผู้ป่วยดูเหมือน HN กรุณาใช้รหัสวิจัยแทน";
+  return null;
+}
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const msg=$("#formMsg");const o=readForm();
+  const err=validate(o);if(err){setMsg(msg,err,false);return}
+  if(!me){setMsg(msg,"ใส่ชื่อผู้บันทึกที่มุมบนก่อน (เครื่องจะจำไว้)",false);$("#meSel").focus();return}
+
+  o.status=hasOutcome(o)?"complete":"ongoing";
+  o.clot=isClot(o)?1:0;
+  const lastP=o.monitor.filter(p=>p.min!=null).sort((a,b)=>a.min-b.min).pop()||null;
+  o.lastMin=lastP?lastP.min:null;o.lastLevel=lastP?lastP.level:null;
+  o.nextDueAt=null;
+  if(o.status==="ongoing"&&lastP?.level!==3){
+    const step=lastP?((lastP.level===1||lastP.level===2)?10:30):15;
+    const nextMin=lastP?lastP.min+step:15;
+    if(o.startTime&&o.date){const t=new Date(o.date+"T"+o.startTime+":00");if(!isNaN(t))o.nextDueAt=new Date(t.getTime()+nextMin*60000).toISOString()}
+    if(!o.nextDueAt)o.nextDueAt=new Date(Date.now()+step*60000).toISOString();
+  }
+  const btn=$("#saveBtn");btn.disabled=true;
+  try{
+    const now=new Date().toISOString();
+    if(editingId){const prev=records.find(r=>r.id===editingId)||{};
+      await col.doc(editingId).set({...o,createdAt:prev.createdAt||now,createdBy:prev.createdBy||me,updatedAt:now,updatedBy:me});
+    }else{const ref=col.doc();await ref.set({...o,createdAt:now,createdBy:me});editingId=ref.id}
+    if(o.status==="complete"){endEdit();setMsg(msg,"บันทึกครบแล้ว ("+o.pid+", "+o.date+") เริ่มรายการใหม่ได้เลย",true);window.scrollTo({top:0})}
+    else{$("#editText").textContent="กำลังฟอก: "+o.pid+" · "+o.date;$("#editBanner").hidden=false;ensureDelete();
+      setMsg(msg,"บันทึกแล้ว "+o.monitor.length+" จุดเวลา · กรอก Step 3 เมื่อคืนเลือด",true)}
+  }catch(ex){const code=ex&&ex.code;
+    const M={bad_key:"รหัสหน่วยไม่ถูกต้อง",unknown_pid:"รหัสวิจัยนี้ไม่อยู่ในทะเบียน กด “เปลี่ยนผู้ป่วย” แล้วแปลง HN ใหม่",
+      need_initials:"ผู้ป่วยใหม่ต้องมีอักษรย่อ",looks_like_hn:"รหัสผู้ป่วยดูเหมือน HN กรุณาใช้รหัสวิจัย",bad_initials:"อักษรย่อห้ามมีตัวเลข",busy:"ระบบกำลังบันทึกของเครื่องอื่น ลองกดบันทึกอีกครั้ง"};
+    setMsg(msg,M[code]||"บันทึกไม่สำเร็จ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง",false);
+  }finally{btn.disabled=false}
+});
+$("#resetBtn").addEventListener("click",()=>{prevAutoVal=null;shiftAutoVal=null;dxLastHidden=null;$("#shiftAuto").hidden=true;actManual=false;earlyAutoVal=null;$("#f-acth").value="";$("#f-actm").value="";if(editingId){endEdit()}else{form.reset();clearMon();form.elements.date.value=today();sync()}$("#formMsg").textContent=""});
+function startEdit(id){
+  const r=records.find(x=>x.id===id);if(!r)return;
+  editingId=id;prevAutoVal=null;fillForm(r);
+  $("#editText").textContent=(isDone(r)?"กำลังแก้ไข: ":"กำลังฟอก: ")+r.pid+" · "+r.date;
+  $("#editBanner").hidden=false;ensureDelete();
+  show("form");window.scrollTo({top:0});
+}
+function endEdit(){
+  editingId=null;prevAutoVal=null;shiftAutoVal=null;dxLastHidden=null;actManual=false;earlyAutoVal=null;$("#f-acth").value="";$("#f-actm").value="";$("#editBanner").hidden=true;form.reset();clearMon();form.elements.date.value=today();sync();
+  const d=document.getElementById("delZone");if(d)d.remove();
+}
+$("#cancelEdit").addEventListener("click",()=>{endEdit();$("#formMsg").textContent=""});
+function ensureDelete(){
+  let z=document.getElementById("delZone");if(z)z.remove();
+  z=el("div","confirm");z.id="delZone";
+  const b=el("button","btn danger","ลบรายการนี้");b.type="button";
+  b.onclick=()=>{z.textContent="";
+    const y=el("button","btn danger","ลบ");y.type="button";const n=el("button","btn","ไม่ลบ");n.type="button";n.onclick=ensureDelete;
+    y.onclick=async()=>{try{await col.doc(editingId).delete();endEdit();setMsg($("#formMsg"),"ลบรายการแล้ว",true)}catch(ex){setMsg($("#formMsg"),"ลบไม่สำเร็จ",false)}};
+    z.append(el("span",null,"ยืนยันลบรายการนี้? ลบแล้วกู้คืนไม่ได้"),y,n)};
+  z.append(b);$("#saveBar").after(z);
+}
+
+function show(v){
+  ["board","form","list","sum"].forEach(k=>{$("#view-"+k).hidden=k!==v});
+  document.querySelectorAll(".tabbar button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v?"true":"false"));
+  try{localStorage.setItem("crf-view",v)}catch(e){}
+}
+document.querySelectorAll(".tabbar button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
+
+function renderList(){
+  const q=$("#search").value.trim().toLowerCase();
+  const box=$("#rows");box.textContent="";
+  const list=records.filter(r=>!q||(String(r.pid||"")+" "+String(r.pinit||"")).toLowerCase().includes(q));
+  const em=$("#listEmpty");em.hidden=list.length>0;
+  em.textContent=records.length?"ไม่พบรหัสที่ค้นหา":"ยังไม่มีข้อมูล เริ่มบันทึกได้ที่แท็บ “บันทึก” รายการแต่ละครั้งที่ฟอกจะแสดงที่นี่";
+  list.forEach(r=>{
+    const b=el("button","rec");b.type="button";
+    const lv=Number(r.maxLevel)||0;
+    b.append(el("span","dot"+(alertsOn&&(r.monitor||[]).length?" l"+lv:"")));
+    const mid=el("span");mid.append(el("span","pid",(r.pid||"–")+(r.pinit?" · "+r.pinit:"")));
+    mid.append(el("div","meta",[r.date,r.locType==="portable"?("Portable "+(r.slot||"")+(r.pward?" "+r.pward:"")):(r.bed?"เตียง "+r.bed:null),LABEL.shift[r.shift],LABEL.ward[r.ward],LABEL.access[r.access],LABEL.anticoag[r.anticoag]].filter(Boolean).join(" · ")));
+    b.append(mid);
+    const right=el("span");right.style.display="flex";right.style.gap="6px";right.style.flexWrap="wrap";right.style.justifyContent="flex-end";
+    if(isDone(r)){right.append(el("span","chip g"+r.grade,"Grade "+r.grade));if(isClot(r))right.append(el("span","chip clot","อุดตัน"))}
+    else right.append(el("span","chip on","กำลังฟอก · "+(r.monitor||[]).length+" จุด"+(alertsOn&&lv?" · "+LV[lv].s:"")));
+    b.append(right);
+    b.addEventListener("click",()=>startEdit(r.id));
+    box.append(b);
+  });
+  $("#countBadge").textContent=records.length?"("+records.length+")":"";
+}
+$("#search").addEventListener("input",renderList);
+
+function renderSum(){
+  const done=records.filter(isDone);
+  const n=done.length,ev=done.filter(isClot).length;
+  $("#k-n").textContent=n.toLocaleString();
+  $("#k-pt").textContent=new Set(done.map(r=>r.pid)).size.toLocaleString();
+  $("#k-ev").textContent=ev.toLocaleString();
+  $("#k-rate").textContent=n?(ev/n*100).toFixed(2):"–";
+  const pr=Math.min(100,Math.round(n/1030*100));$("#k-target").textContent=pr+"%";$("#k-prog").style.width=pr+"%";
+  $("#k-mon").textContent=n?Math.round(done.filter(r=>(r.monitor||[]).length>=2).length/n*100)+"%":"–";
+  const gc=[0,0,0,0];done.forEach(r=>{const g=Number(r.grade);if(g>=0&&g<=3)gc[g]++});
+  const gb=$("#gbar"),gl=$("#glegend");gb.textContent="";gl.textContent="";
+  const cols=["var(--g)","var(--y)","var(--o)","var(--r)"];
+  gc.forEach((c,i)=>{if(n&&c){const s=el("i");s.style.width=(c/n*100)+"%";s.style.background=cols[i];s.title="Grade "+i+": "+c;gb.append(s)}
+    const lg=el("span",null,"Grade "+i+" · "+c+(n?" ("+Math.round(c/n*100)+"%)":""));lg.style.setProperty("--c",cols[i]);gl.append(lg)});
+  const tb=$("#factorRows");tb.textContent="";
+  const groups=[
+    ["Dx ภาวะไต","renalDx"],["ใส่ ETT","ett"],["เคยอุดตันครั้งก่อน","prevClot"],["Access","access"],["เครื่อง","machine"],["ยาต้านการแข็งตัว","anticoag"],["ให้เลือดผ่านวงจร","transfusion"],
+    ["Hct","hctG",r=>r.hct==null?null:(r.hct>=30?"≥ 30%":"< 30%")],
+    ["เกล็ดเลือด","pltG",r=>r.plt==null?null:(r.plt<100?"< 100":"≥ 100")],
+    ["ระดับสีสูงสุดระหว่างฟอก","lvG",r=>(r.monitor||[]).length?LV[Number(r.maxLevel)||0].s:null]
+  ];
+  groups.forEach(([title,key,fn])=>{
+    const m=new Map();
+    done.forEach(r=>{const v=fn?fn(r):(r[key]==null?null:(LABEL[key]?.[r[key]]||r[key]));if(v==null)return;const a=m.get(v)||[0,0];a[0]++;if(isClot(r))a[1]++;m.set(v,a)});
+    let first=true;if(!m.size)m.set("ยังไม่มีข้อมูล",null);
+    m.forEach((a,label)=>{
+      const tr=el("tr");const t=el("td",null,first?title:"");t.style.fontWeight="600";first=false;
+      const c3=el("td","num",a?a[0]:"–"),c4=el("td","num",a?a[1]:"–"),c5=el("td","num",a&&a[0]?(a[1]/a[0]*100).toFixed(1):"–");
+      tr.append(t,el("td",null,label),c3,c4,c5);tb.append(tr);
+    });
+  });
+}
+
+function csvCell(v){if(v==null)return "";const s=String(v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+async function saveCsv(name,lines){
+  const msg=$("#csvMsg");const text="﻿"+lines.join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"text/csv"}));a.download=name+"-"+today()+".csv";document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000);setMsg(msg,"ดาวน์โหลดแล้ว",true)
+}
+const sortedRecs=()=>[...records].sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+$("#csvBtn").addEventListener("click",()=>{
+  if(!records.length){setMsg($("#csvMsg"),"ยังไม่มีข้อมูลให้ส่งออก",false);return}
+  const cols=["session_id","status","n_points"].concat(COLS);
+  const lines=[cols.join(",")].concat(sortedRecs().map(r=>cols.map(k=>csvCell(k==="session_id"?r.id:k==="n_points"?(r.monitor||[]).length:k==="status"?(isDone(r)?"complete":"ongoing"):k==="clot"?(isClot(r)?1:0):r[k])).join(",")));
+  saveCsv("circuit-clotting-eCRF",lines);
+});
+$("#csvMonBtn").addEventListener("click",()=>{
+  const cols=["session_id","pid","date","minute","bfr","vp","tmp","d_vp","d_tmp","alarm_repeat","pump_interrupt","anticoag_not_as_planned","clot_grade_point","level","n_triggers","triggers","actions","session_clot"];
+  const lines=[cols.join(",")];
+  sortedRecs().forEach(r=>{
+    const pts=(r.monitor||[]).slice().sort((a,b)=>(a.min??0)-(b.min??0));const b=pts.find(p=>p.vp!=null||p.tmp!=null);
+    pts.forEach(p=>{const dvp=(b&&p.vp!=null&&b.vp!=null)?p.vp-b.vp:null,dtmp=(b&&p.tmp!=null&&b.tmp!=null)?p.tmp-b.tmp:null;
+      lines.push([r.id,r.pid,r.date,p.min,p.bfr,p.vp,p.tmp,dvp,dtmp,p.alarm?1:0,p.pump?1:0,p.acBad?1:0,p.clot??"",p.level??"",(p.triggers||[]).length,(p.triggers||[]).join("; "),(p.actions||[]).join("; "),isDone(r)?(isClot(r)?1:0):""].map(csvCell).join(","))});
+  });
+  if(lines.length<2){setMsg($("#csvMsg"),"ยังไม่มีค่าตามเวลาให้ส่งออก",false);return}
+  saveCsv("circuit-clotting-monitoring",lines);
+});
+
+function applyAlerts(){$("#alertNote").textContent=alertsOn?"":"· ขณะนี้ปิดการเตือน (แสดงเฉพาะ ΔVP/ΔTMP)";$("#alertToggle").checked=alertsOn;updateDeltas();renderList()}
+function renderAll(){renderList();renderSum();renderBoard();renderPidOptions();ptUI()}
+// ---------- board ----------
+let boardShift=((d=>d.getHours()*60+d.getMinutes()>=930)(new Date())?"r3":"r1");
+OPTS.shift.forEach(([v,t])=>{const l=el("label");const i=el("input");i.type="radio";i.name="boardShift";i.value=v;i.checked=v===boardShift;i.addEventListener("change",()=>{boardShift=v;renderBoard()});l.append(i,el("span",null,t));$("#shiftPick").append(l)});
+let soundOn=false,actx=null,alerted=new Set();
+$("#soundBtn").addEventListener("click",()=>{soundOn=!soundOn;$("#soundBtn").setAttribute("aria-pressed",soundOn?"true":"false");$("#soundBtn").textContent=soundOn?"เสียงเตือนเปิดอยู่":"เปิดเสียงเตือน";
+  if(soundOn){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();actx.resume();beep(1)}catch(e){}}});
+function beep(n){if(!soundOn||!actx)return;for(let k=0;k<n;k++){const o=actx.createOscillator(),g=actx.createGain();o.type="sine";o.frequency.value=880;const t=actx.currentTime+k*0.35;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.3,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.25);o.connect(g).connect(actx.destination);o.start(t);o.stop(t+0.3)}}
+function dueText(r){if(!r.nextDueAt)return r.lastLevel===3?"คืนเลือดตาม protocol":"";const m=Math.round((new Date(r.nextDueAt)-Date.now())/60000);return m>=0?"ประเมินถัดไปอีก "+m+" นาที":"เลยเวลาประเมิน "+(-m)+" นาที"}
+function bedCard(label,r){
+  const b=el("button","bed");b.type="button";
+  b.append(el("div","no",label));
+  if(!r){b.classList.add("free");b.append(el("div","st","ว่าง"));b.disabled=true;return b}
+  const lv=r.lastLevel;const over=r.nextDueAt&&new Date(r.nextDueAt)<Date.now();
+  if(alertsOn&&lv!=null)b.classList.add("l"+lv);if(alertsOn&&over)b.classList.add("over");
+  b.append(el("div","who",(r.pid||"")+(r.pinit?" · "+r.pinit:"")));
+  b.append(el("div","st",(r.lastMin!=null?"นาทีที่ "+r.lastMin+" · ":"ยังไม่มีจุดเวลา · ")+(alertsOn&&lv!=null?LV[lv].s:"")));
+  if(alertsOn)b.append(el("div","due",dueText(r)));
+  b.addEventListener("click",()=>startEdit(r.id));
+  const k=r.id+":"+(r.lastMin??"")+":"+lv+":"+(over?"o":"");
+  if(alertsOn&&(lv>=2||over)&&!alerted.has(k)){alerted.add(k);beep(lv===3||over?3:2)}
+  return b;
+}
+function renderBoard(){
+  const ug=$("#unitGrid"),pg=$("#portGrid");if(!ug)return;ug.textContent="";pg.textContent="";
+  const live=records.filter(r=>!isDone(r));
+  for(let b=1;b<=UNIT_BEDS;b++){const r=live.find(x=>x.locType!=="portable"&&Number(x.bed)===b);ug.append(bedCard("เตียง "+b,r))}
+  for(let p=1;p<=PORT_SLOTS;p++){const r=live.find(x=>x.locType==="portable"&&x.slot==="P"+p&&(x.shift||"r1")===boardShift);pg.append(bedCard("P"+p+(r&&r.pward?" · "+r.pward:""),r))}
+}
+setInterval(renderBoard,30000);
+
+form.elements.date.value=today();renderMon();sync();
+// แป้นพิมพ์เปิด: แถบปุ่มบันทึกหยุดลอย ไม่บังช่องที่กำลังพิมพ์
+const isTyping=e=>e&&e.matches&&e.matches('input:not([type=checkbox]):not([type=radio]),textarea')&&!e.closest(".savebar");
+document.addEventListener("focusin",e=>{if(isTyping(e.target))document.body.classList.add("typing")});
+document.addEventListener("focusout",()=>{setTimeout(()=>{if(!isTyping(document.activeElement))document.body.classList.remove("typing")},120)});
+try{$("#todayTh").textContent=new Date().toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"})}catch(e){}
+try{const v=localStorage.getItem("crf-view");if(v==="list"||v==="sum"||v==="board")show(v)}catch(e){}
+renderAll();
+
+(async()=>{
+  const status=$("#status");
+  if(API_URL.startsWith("PASTE")){status.textContent="ยังไม่ได้ตั้งค่า API_URL ในไฟล์ index.html";status.className="status err";return}
+  const tg=$("#alertToggle");
+  tg.addEventListener("change",async()=>{const ak=$("#adminKey").value.trim();tg.disabled=true;
+    try{await api("setAlerts",{adminKey:ak,alerts:tg.checked});alertsOn=tg.checked;applyAlerts();setMsg($("#alertMsg"),tg.checked?"เปิดการเตือนแล้ว":"ปิดการเตือนแล้ว",true)}
+    catch(e){tg.checked=alertsOn;setMsg($("#alertMsg"),e.code==="bad_admin_key"?"รหัสผู้ดูแลไม่ถูกต้อง":"เปลี่ยนไม่สำเร็จ",false)}finally{tg.disabled=false}});
+  async function load(full){
+    try{const j=await api(full?"list":"active");
+      alertsOn=j.alerts!==false;
+      if(Array.isArray(j.patients))serverPts=j.patients;
+      if(full)records=j.records;else{const ids=new Set(j.records.map(r=>r.id));records=j.records.concat(records.filter(r=>!ids.has(r.id)&&isDone(r)))}
+      records.sort((x,y)=>String(y.createdAt||"").localeCompare(String(x.createdAt||"")));
+      status.textContent="เชื่อมต่อแล้ว · อัปเดตล่าสุด "+new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"});status.className="status ok";
+      applyAlerts();renderAll();return true;
+    }catch(e){
+      if(e.code==="bad_key"){showGate();return false}
+      status.textContent="เชื่อมต่อไม่ได้ ("+(e.code||e.message)+") จะลองใหม่อัตโนมัติ";status.className="status err";return false}
+  }
+  function showGate(){$("#gate").hidden=false;document.querySelectorAll("#view-board,#view-form,#view-list,#view-sum,nav.tabs").forEach(x=>x.hidden=true);status.textContent="ต้องใส่รหัสหน่วยก่อนใช้งาน";status.className="status err"}
+  $("#gateBtn").addEventListener("click",async()=>{unitKey=$("#gateKey").value.trim();try{localStorage.setItem("hdcw-key",unitKey)}catch(e){}
+    if(await load(true)){$("#gate").hidden=true;document.querySelector("nav.tabs").hidden=false;show("board")}else setMsg($("#gateMsg"),"รหัสไม่ถูกต้อง",false)});
+  if(!unitKey){showGate();return}
+  await load(true);
+  setInterval(()=>{if(document.visibilityState==="visible")load(false)},20000);
+  setInterval(()=>{if(document.visibilityState==="visible")load(true)},300000);
+})();
+})();
+</script>
+</body>
+</html>
+
+</body></html>
